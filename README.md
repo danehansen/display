@@ -25,7 +25,7 @@ Dispatches an event into the event flow.
 Gets or sets the sprite’s frame. In a typical forward/rewind sprite, this number is limited between 0 and the total number of frames. In a looping sprite, this number can wrap and even be negative.
 * __frameTo__ _(value:Number)_
 Similar to setting the frame, except that the sprite will play to that frame at the current frame rate.
-* __nextFrame _()_
+* __nextFrame__ _()_
 Increments the sprite by one frame.
 * __play__ _(loop:Boolean = false)_
 Causes the sprite to play at the current frame rate until the end frame is reached. If loop is set to true and is a looping type sprite, the sprite will play indefinitely.
