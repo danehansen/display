@@ -43,3 +43,21 @@ Causes the sprite to recalculate it’s size. Only needed if the element has dyn
 Causes the sprite to play backwards at the current frame rate until the first frame is reached. If loop is set to true and is a looping type sprite, the sprite will play indefinitely.
 * __stop__ _()_
 Causes the sprite to stop any playback.
+
+##Public Constants##
+
+* __COMPLETE__ : _String_
+[static] The Sprite.COMPLETE constant defines the value of the type property of a complete event object.
+* __ENTER&#95;FRAME__ : _String_
+[static] The Sprite.ENTER_FRAME constant defines the value of the type property of a enterFrame event object.
+* __REVERSE&#95;COMPLETE__ : _String_
+[static] The Sprite.REVERSE_COMPLETE constant defines the value of the type property of a reverseComplete event object.
+
+##Events##
+
+* __complete__
+[broadcast event] Dispatched when the playhead has reached 1 when playing forward, or a multiple of 1 in the case of a looping sprite.
+* __enterFrame__
+[broadcast event] Dispatched when the playhead is entering a new frame.
+* __reverseComplete__
+[broadcast event] Dispatched when the playhead has reached 0 when playing backward, or a multiple of 1 in the case of a looping sprite.
