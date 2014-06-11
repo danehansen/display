@@ -6,7 +6,7 @@
 ///////////////////////////////////////////////
 
 	//requires greensock/TweenLite.js
-  	// TODO: SuperSprite, ForwardRewind, PlayThrough
+  	// TODO: SuperSprite, PlayThrough
 
 Sprite.ENTER_FRAME="onEnterFrame";
 Sprite.COMPLETE="onComplete";
@@ -14,32 +14,35 @@ Sprite.REVERSE_COMPLETE="onReverseComplete";
 
 function Sprite(element, columns, totalFrames, loop, frameRate)
 {
-	this.element=element;
-	this._columns=columns;
-	this._totalFrames=totalFrames;
-	this.loop=loop||false;
-	this.frameRate=frameRate||60;
+	if(arguments.length>0)
+	{
+		this.element=element;
+		this._columns=columns;
+		this._totalFrames=totalFrames;
+		this.loop=loop||false;
+		this.frameRate=frameRate||60;
 
-	this._progress=0;
-	this._frame=0;
-	this._actualFrame=0;
-	this._dest=null;
-	this._callbacks={};
-	this.resize=this.resize.bind(this);
-	this.progress=this.progress.bind(this);
-	this.frame=this.frame.bind(this);
-	this.progressTo=this.progressTo.bind(this);
-	this.frameTo=this.frameTo.bind(this);
-	this.play=this.play.bind(this);
-	this.rewind=this.rewind.bind(this);
-	this.stop=this.stop.bind(this);
-	this.prevFrame=this.prevFrame.bind(this);
-	this.nextFrame=this.nextFrame.bind(this);
-	this.addEventListener=this.addEventListener.bind(this);
-	this.removeEventListener=this.removeEventListener.bind(this);
-	this.dispatchEvent=this.dispatchEvent.bind(this);
-	
-	this.resize();
+		this._progress=0;
+		this._frame=0;
+		this._actualFrame=0;
+		this._dest=null;
+		this._callbacks={};
+		this.resize=this.resize.bind(this);
+		this.progress=this.progress.bind(this);
+		this.frame=this.frame.bind(this);
+		this.progressTo=this.progressTo.bind(this);
+		this.frameTo=this.frameTo.bind(this);
+		this.play=this.play.bind(this);
+		this.rewind=this.rewind.bind(this);
+		this.stop=this.stop.bind(this);
+		this.prevFrame=this.prevFrame.bind(this);
+		this.nextFrame=this.nextFrame.bind(this);
+		this.addEventListener=this.addEventListener.bind(this);
+		this.removeEventListener=this.removeEventListener.bind(this);
+		this.dispatchEvent=this.dispatchEvent.bind(this);
+		
+		this.resize();
+	}
 }
 
 Sprite.prototype.resize=function()
@@ -59,7 +62,10 @@ Sprite.prototype.progress=function(value)
 	{
 		value=this._limit(value);
 		if(this._progress!=value)
+		{
 			var dispatch=true;
+			var forward=value>this._progress;
+		}
 		this._progress=value;
 		var dest=this._progressToFrame(value);
 		this._frame=dest;
@@ -73,13 +79,8 @@ Sprite.prototype.progress=function(value)
 			this._showFrame(dest);
 			this.dispatchEvent(Sprite.ENTER_FRAME);
 		}
-		if(dispatch)
-		{
-			if(!this.loop && value==0)
-				this.dispatchEvent(Sprite.REVERSE_COMPLETE);
-			else if(value%1==0)
-				this.dispatchEvent(Sprite.COMPLETE);
-		}
+		if(dispatch && value%1==0)
+			this.dispatchEvent(forward?Sprite.COMPLETE:Sprite.REVERSE_COMPLETE);
 	}
 }
 
