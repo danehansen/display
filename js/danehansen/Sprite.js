@@ -6,7 +6,7 @@
 ///////////////////////////////////////////////
 
 	//requires greensock/TweenLite.js
-  	// TODO: SuperSprite, PlayThrough
+  	// TODO: SuperSprite
 
 Sprite.ENTER_FRAME="onEnterFrame";
 Sprite.COMPLETE="onComplete";

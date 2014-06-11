@@ -76,16 +76,7 @@ Dispatched when the progress has reached 0 on a linear sprite, or any whole numb
 
 __Inheritance__ : ForwardRewind > Sprite > Object  
 
-A sprite class designed to quickly make an animated sprite play forward on mouse over, and reverse on mouse out. Great for buttons. This class depends on TweenLite.js which is available at <http://greensock.com/>. It is assumed that the sprite sheet will be laid out left to right, top to bottom.
-
-In addition to TweenLite, a certain amount of css styling will have to be applied to the elements to be animated. It is assumed that they will be provided with a `background-image`, and that the element will have a size applied as well. If the element will be resized or if a retina version of the image will be supplied, then the a `background-size` property will also have to be applied to the element. For example, if your sprite sheet has 4 columns and 8 rows, your element’s css will read something like this: .
-
-	{
-		width:220px;
-		height:138px;
-		background-imgage:url(http://goo.gl/XDwsNz);
-		background-size:400% 800%;
-	}
+A class designed to quickly make an animated sprite play forward on mouse over, and reverse on mouse out. Great for rollover states on buttons. This class depends on TweenLite.js which is available at <http://greensock.com/> as well as Sprite.js. Instantiating it is almost exactly like its parent class, Sprite, minus the loop argument in the constructor as a ForwardRewind instance is designed to play only forward and back between 0 and 1.
 
 ##Public Properties##
 
@@ -102,3 +93,27 @@ Constructor.
 Adds the event listeners for mouseOver and mouseOut.
 * __deactivate__()  
 Removes the event listeners for mouseOver and mouseOut. Call this method if you no longer want to use the instance or wish to dispose of it.
+
+#ForwardForward#
+
+__Inheritance__ : ForwardForward > Sprite > Object  
+
+A class designed to quickly make an animated sprite play forward to a given frame on mouse over, and then continue to the end and back to the first frame on mouse out. Great for rollover states on buttons. This class depends on TweenLite.js which is available at <http://greensock.com/> as well as Sprite.js. Instantiating it is almost exactly like its parent class, Sprite, minus the loop argument in the constructor as a ForwardForward instance is designed to utilize a looping sprite sheet.
+
+##Public Properties##
+
+* __element__ : Element  
+[Read-only] DOM Element manipulated.
+* __frameRate__ : unit  
+The rate per second at which the sprite will play through.
+
+##Public Methods##
+
+* __ForwardForward__(element:Element, columns:uint, totalFrames:uint, overFrame:uint, frameRate:uint = 60)  
+Constructor.
+* __activate__()  
+Adds the event listeners for mouseOver and mouseOut.
+* __deactivate__()  
+Removes the event listeners for mouseOver and mouseOut. Call this method if you no longer want to use the instance or wish to dispose of it.
+* __overFrame__(value:uint):*  
+Gets or sets the sprite’s mouse over frame. This would be a uint somewhere in between your sprite’s first and last frames that the instance would settle on, until moused out.
