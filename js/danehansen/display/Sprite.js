@@ -6,41 +6,41 @@
 ///////////////////////////////////////////////
 
 	//requires greensock/TweenLite.js
-  	// TODO: SuperSprite
+	//requires danehansen/events/EventDispatcher.js
 
 Sprite.ENTER_FRAME="onEnterFrame";
 Sprite.COMPLETE="onComplete";
 Sprite.REVERSE_COMPLETE="onReverseComplete";
 
-function Sprite(element, columns, totalFrames, loop, frameRate)
+Sprite.prototype=Object.create(EventDispatcher.prototype);
+Sprite.prototype.constructor=Sprite;
+function Sprite(element, columns, frames, loop, frameRate)
 {
-	if(arguments.length>0)
+	EventDispatcher.call(this);
+	
+	this.loop=loop||false;
+	this.frameRate=frameRate||60;
+	this._progress=0;
+	this._frame=0;
+	this._actualFrame=0;
+	this._dest=null;
+	
+	this.resize=this.resize.bind(this);
+	this.progress=this.progress.bind(this);
+	this.frame=this.frame.bind(this);
+	this.progressTo=this.progressTo.bind(this);
+	this.frameTo=this.frameTo.bind(this);
+	this.play=this.play.bind(this);
+	this.rewind=this.rewind.bind(this);
+	this.stop=this.stop.bind(this);
+	this.prevFrame=this.prevFrame.bind(this);
+	this.nextFrame=this.nextFrame.bind(this);
+
+	if(element)
 	{
 		this.element=element;
 		this._columns=columns;
-		this._totalFrames=totalFrames;
-		this.loop=loop||false;
-		this.frameRate=frameRate||60;
-
-		this._progress=0;
-		this._frame=0;
-		this._actualFrame=0;
-		this._dest=null;
-		this._callbacks={};
-		this.resize=this.resize.bind(this);
-		this.progress=this.progress.bind(this);
-		this.frame=this.frame.bind(this);
-		this.progressTo=this.progressTo.bind(this);
-		this.frameTo=this.frameTo.bind(this);
-		this.play=this.play.bind(this);
-		this.rewind=this.rewind.bind(this);
-		this.stop=this.stop.bind(this);
-		this.prevFrame=this.prevFrame.bind(this);
-		this.nextFrame=this.nextFrame.bind(this);
-		this.addEventListener=this.addEventListener.bind(this);
-		this.removeEventListener=this.removeEventListener.bind(this);
-		this.dispatchEvent=this.dispatchEvent.bind(this);
-		
+		this._frames=frames;
 		this.resize();
 	}
 }
@@ -71,9 +71,9 @@ Sprite.prototype.progress=function(value)
 		this._frame=dest;
 		while(dest<0)
 		{
-			dest+=this._totalFrames;
+			dest+=this._frames;
 		}
-		dest=dest%this._totalFrames;
+		dest=dest%this._frames;
 		if(this._actualFrame!=dest)
 		{
 			this._showFrame(dest);
@@ -98,7 +98,7 @@ Sprite.prototype.progressTo=function(num, _loopDir)
 	if(this._progress!==num && this._dest!==num)
 	{
 		this._dest=num;
-		var dur=Math.abs(num-this._progress)*this._totalFrames/this.frameRate;
+		var dur=Math.abs(num-this._progress)*this._frames/this.frameRate;
 		TweenLite.to(this, dur, {progress:num, ease:Linear.easeNone, onComplete:this._resetDest, onCompleteScope:this, onCompleteParams:[_loopDir]});
 	}
 }
@@ -134,42 +134,6 @@ Sprite.prototype.stop=function()
 	TweenLite.killTweensOf(this);
 }
 
-Sprite.prototype.addEventListener=function(type, listener)
-{
-	var callbacks=this._callbacks[type];
-	if(!callbacks)
-	{
-		callbacks=[];
-		this._callbacks[type]=callbacks;
-	}
-	if(callbacks.indexOf(listener)==-1)
-		callbacks.push(listener);
-}
-
-Sprite.prototype.removeEventListener=function(type, listener)
-{
-	var callbacks=this._callbacks[type];
-	if(callbacks)
-	{
-		var index=callbacks.indexOf(listener);
-		if(index>=0)
-			callbacks.splice(index,1);
-	}
-}
-
-Sprite.prototype.dispatchEvent=function(type)
-{
-	var callbacks=this._callbacks[type];
-	if(callbacks)
-	{
-		var obj={target:this, type:type};
-		for(var i=0, iLen=callbacks.length; i<iLen; i++)
-		{
-			callbacks[i](obj);
-		}
-	}
-}
-
 Sprite.prototype._showFrame=function(integer)
 {
 	this._actualFrame=integer;
@@ -179,17 +143,17 @@ Sprite.prototype._showFrame=function(integer)
 Sprite.prototype._progressToFrame=function(num)
 {
 	if(num<0)
-		return Math.ceil(num*(this._totalFrames-(this.loop?0:1)));
+		return Math.ceil(num*(this._frames-(this.loop?0:1)));
 	else
-		return Math.floor(num*(this._totalFrames-(this.loop?0:1)));
+		return Math.floor(num*(this._frames-(this.loop?0:1)));
 }
 
 Sprite.prototype._frameToProgress=function(integer)
 {
 	if(this.loop)
-		return integer/(this._totalFrames-0);
+		return integer/(this._frames-0);
 	else
-		return integer/(this._totalFrames-1);
+		return integer/(this._frames-1);
 }
 
 Sprite.prototype._limit=function(num)

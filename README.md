@@ -1,7 +1,9 @@
 #Sprite#
 
-__Inheritance__ : Sprite > Object  
-__Subclasses__ : SuperSprite, ForwardRewind, PlayThrough
+__Package__ : com.danehansen.display  
+__Class__ : public class Sprite  
+__Inheritance__ : Sprite > EventDispatcher > Object  
+__Subclasses__ : ForwardForward, ForwardRewind, SuperSprite
 
 A sprite class designed to easily create/manipulate animated sprite sheets. This class depends on TweenLite.js which is available at <http://greensock.com/>. It is assumed that the sprite sheet will be laid out left to right, top to bottom.
 
@@ -26,11 +28,7 @@ Whether or not the sprite instance is intended to play as a loop. If the beginni
 ##Public Methods##
 
 * __Sprite__(element:Element, columns:uint, totalFrames:uint, loop:Boolean = false, frameRate:uint = 60)  
-Constructor.
-* __addEventListener__(type:String, listener:Function)  
-Registers an event listener object with an EventDispatcher object so that the listener receives notification of an event.
-* __dispatchEvent__(type:String)  
-Dispatches an event into the event flow.
+Creates a Sprite object, using a provided dom element, number of columns of the sprite sheet background image, the total number of frames, whether it will loop or not, and the frame rate.
 * __frame__(value:int):*  
 Gets or sets the sprite’s frame. In a typical forward/rewind sprite, this number is limited between 0 and the total number of frames. In a looping sprite, this number can wrap and even be negative.
 * __frameTo__(value:Number)  
@@ -45,8 +43,6 @@ Decrements the sprite by one frame.
 Gets or sets the sprite’s progress. In a typical forward/rewind sprite, this number is limited between 0 and 1. In a looping sprite, this number can wrap and even be negative.
 * __progressTo__(value:Number)  
 Similar to setting the progress, except that the sprite will play to that progress point at the current frame rate.
-* __removeEventListener__ (type:String, listener:Function)  
-Removes a listener from the EventDispatcher object.
 * __resize__()  
 Causes the sprite to recalculate it’s size. Only needed if the element has dynamic css sizing or if the element has been manually sized using JavaScript.
 * __rewind__(loop:Boolean = false)  
@@ -74,21 +70,16 @@ Dispatched when the progress has reached 0 on a linear sprite, or any whole numb
 
 #ForwardRewind#
 
-__Inheritance__ : ForwardRewind > Sprite > Object  
+__Package__ : com.danehansen.display  
+__Class__ : public class ForwardRewind  
+__Inheritance__ : ForwardRewind > Sprite > EventDispatcher > Object  
 
 A class designed to quickly make an animated sprite play forward on mouse over, and reverse on mouse out. Great for rollover states on buttons. This class depends on TweenLite.js which is available at <http://greensock.com/> as well as Sprite.js. Instantiating it is almost exactly like its parent class, Sprite, minus the loop argument in the constructor as a ForwardRewind instance is designed to play only forward and back between 0 and 1.
-
-##Public Properties##
-
-* __element__ : Element  
-[Read-only] DOM Element manipulated.
-* __frameRate__ : unit  
-The rate per second at which the sprite will play through.
 
 ##Public Methods##
 
 * __ForwardRewind__(element:Element, columns:uint, totalFrames:uint, frameRate:uint = 60)  
-Constructor.
+Creates a ForwardRewind object, using a provided dom element, number of columns of the sprite sheet background image, the total number of frames, and the frame rate.
 * __activate__()  
 Adds the event listeners for mouseOver and mouseOut.
 * __deactivate__()  
@@ -96,24 +87,39 @@ Removes the event listeners for mouseOver and mouseOut. Call this method if you 
 
 #ForwardForward#
 
-__Inheritance__ : ForwardForward > Sprite > Object  
+__Package__ : com.danehansen.display  
+__Class__ : public class ForwardForward  
+__Inheritance__ : ForwardForward > Sprite > EventDispatcher > Object  
 
 A class designed to quickly make an animated sprite play forward to a given frame on mouse over, and then continue to the end and back to the first frame on mouse out. Great for rollover states on buttons. This class depends on TweenLite.js which is available at <http://greensock.com/> as well as Sprite.js. Instantiating it is almost exactly like its parent class, Sprite, minus the loop argument in the constructor as a ForwardForward instance is designed to utilize a looping sprite sheet.
-
-##Public Properties##
-
-* __element__ : Element  
-[Read-only] DOM Element manipulated.
-* __frameRate__ : unit  
-The rate per second at which the sprite will play through.
 
 ##Public Methods##
 
 * __ForwardForward__(element:Element, columns:uint, totalFrames:uint, overFrame:uint, frameRate:uint = 60)  
-Constructor.
+Creates a ForwardForward object, using a provided dom element, number of columns of the sprite sheet background image, the total number of frames, the over frame number, and the frame rate.
 * __activate__()  
 Adds the event listeners for mouseOver and mouseOut.
 * __deactivate__()  
 Removes the event listeners for mouseOver and mouseOut. Call this method if you no longer want to use the instance or wish to dispose of it.
 * __overFrame__(value:uint):*  
 Gets or sets the sprite’s mouse over frame. This would be a uint somewhere in between your sprite’s first and last frames that the instance would settle on, until moused out.
+
+#SuperSprite#
+
+__Package__ : com.danehansen.display  
+__Class__ : public class SuperSprite  
+__Inheritance__ : SuperSprite > Sprite > EventDispatcher > Object  
+
+A sprite class designed for when you need to divide your sprite into several separate images. One reason for doing this would be if your sprite exceeds a total of 5 million pixels. Browsers (especially mobile) tend to have unpredictable behavior when a background image exceeds 5 million pixels. 
+
+##Public Properties##
+
+* __sprites__ : Array  
+[Read-only] An array of the subsprites.
+
+##Public Methods##
+
+* __SuperSprite__(sprites:Array, loop:Boolean = false, frameRate:uint = 60)  
+Creates a SuperSprite object, using an array of subsprites, whether it will loop or not, and the frame rate.
+* __resize__()  
+[override] Calls the resize method on all subsprites.

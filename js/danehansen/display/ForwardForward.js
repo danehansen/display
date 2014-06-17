@@ -6,17 +6,20 @@
 ///////////////////////////////////////////////
 
 	//requires greensock/TweenLite.js
-	//requires danehansen/Sprite.js
+	//requires danehansen/events/EventDispatcher.js
+	//requires danehansen/display/Sprite.js
 
-ForwardForward.prototype=new Sprite();
-ForwardForward.prototype.constructor=Sprite;
+ForwardForward.prototype=Object.create(Sprite.prototype);
+ForwardForward.prototype.constructor=ForwardForward;
 function ForwardForward(element, columns, totalFrames, overFrame, frameRate)
 {
 	Sprite.call(this, element, columns, totalFrames, true, frameRate);
+	
 	this.activate=this.activate.bind(this);
 	this.deactivate=this.deactivate.bind(this);
 	this._onMouseOver=this._onMouseOver.bind(this);
 	this.overFrame=this.overFrame.bind(this);
+	
 	this.overFrame(overFrame);
 	this.activate();
 }
