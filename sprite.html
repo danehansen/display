@@ -129,7 +129,7 @@
 		<strong>Class</strong> : public class Sprite <br />
 		<strong>Inheritance</strong> : Sprite > EventDispatcher > Object <br />
 		<strong>Subclasses</strong> : ForwardForward, ForwardRewind, SuperSprite</p>
-		<p>A sprite class designed to easily create/manipulate animated sprite sheets. This class depends on TweenLite.js which is available at <a href="http://greensock.com/">http://greensock.com/</a>. It is assumed that the sprite sheet will be laid out left to right, top to bottom.</p>
+		<p>A sprite class designed to easily create/manipulate animated sprite sheets. This class depends on TweenLite.js which is available at <a href="http://greensock.com/">http://greensock.com/</a> as well as EventDispatcher.js. It is assumed that the sprite sheet will be laid out left to right, top to bottom.</p>
 		<p>In addition to TweenLite, a certain amount of css styling will have to be applied to the elements to be animated. It is assumed that they will be provided with a <code>background-image</code>, and that the element will have a size applied as well. If the element will be resized or if a retina version of the image will be supplied, then the a <code>background-size</code> property will also have to be applied to the element. For example, if your sprite sheet has 4 columns and 8 rows, your element’s css will read something like this: .</p>
 		<pre><code>{
 	width:220px;
@@ -196,7 +196,7 @@
 		<p><strong>Package</strong> : com.danehansen.display <br />
 		<strong>Class</strong> : public class ForwardRewind <br />
 		<strong>Inheritance</strong> : ForwardRewind > Sprite > EventDispatcher > Object  </p>
-		<p>A class designed to quickly make an animated sprite play forward on mouse over, and reverse on mouse out. Great for rollover states on buttons. This class depends on TweenLite.js which is available at <a href="http://greensock.com/">http://greensock.com/</a> as well as Sprite.js. Instantiating it is almost exactly like its parent class, Sprite, minus the loop argument in the constructor as a ForwardRewind instance is designed to play only forward and back between 0 and 1.</p>
+		<p>A class designed to quickly make an animated sprite play forward on mouse over, and reverse on mouse out. Great for rollover states on buttons. This class depends on TweenLite.js which is available at <a href="http://greensock.com/">http://greensock.com/</a> as well as Sprite.js and EventDispatcher.js. Instantiating it is almost exactly like its parent class, Sprite, minus the loop argument in the constructor as a ForwardRewind instance is designed to play only forward and back between 0 and 1.</p>
 		<h2>Public Methods</h2>
 		<ul>
 			<li><strong>ForwardRewind</strong>(element:Element, columns:uint, totalFrames:uint, frameRate:uint = 60) <br />
@@ -210,7 +210,7 @@
 		<p><strong>Package</strong> : com.danehansen.display <br />
 		<strong>Class</strong> : public class ForwardForward <br />
 		<strong>Inheritance</strong> : ForwardForward > Sprite > EventDispatcher > Object  </p>
-		<p>A class designed to quickly make an animated sprite play forward to a given frame on mouse over, and then continue to the end and back to the first frame on mouse out. Great for rollover states on buttons. This class depends on TweenLite.js which is available at <a href="http://greensock.com/">http://greensock.com/</a> as well as Sprite.js. Instantiating it is almost exactly like its parent class, Sprite, minus the loop argument in the constructor as a ForwardForward instance is designed to utilize a looping sprite sheet.</p>
+		<p>A class designed to quickly make an animated sprite play forward to a given frame on mouse over, and then continue to the end and back to the first frame on mouse out. Great for rollover states on buttons. This class depends on TweenLite.js which is available at <a href="http://greensock.com/">http://greensock.com/</a> as well as Sprite.js and EventDispatcher.js. Instantiating it is almost exactly like its parent class, Sprite, minus the loop argument in the constructor as a ForwardForward instance is designed to utilize a looping sprite sheet.</p>
 		<h2>Public Methods</h2>
 		<ul>
 			<li><strong>ForwardForward</strong>(element:Element, columns:uint, totalFrames:uint, overFrame:uint, frameRate:uint = 60) <br />
@@ -226,7 +226,7 @@
 		<p><strong>Package</strong> : com.danehansen.display <br />
 		<strong>Class</strong> : public class SuperSprite <br />
 		<strong>Inheritance</strong> : SuperSprite > Sprite > EventDispatcher > Object  </p>
-		<p>A sprite class designed for when you need to divide your sprite into several separate images. One reason for doing this would be if your sprite exceeds a total of 5 million pixels. Browsers (especially mobile) tend to have unpredictable behavior when a background image exceeds 5 million pixels. </p>
+		<p>A sprite class designed for when you need to divide your sprite into several separate images. One reason for doing this would be if your sprite exceeds a total of 5 million pixels. Browsers (especially mobile) tend to have unpredictable behavior when a background image exceeds 5 million pixels. This class depends on TweenLite.js which is available at <http://greensock.com/> as well as Sprite.js and EventDispatcher.js.</p>
 		<h2>Public Properties</h2>
 		<ul>
 			<li><strong>sprites</strong> : Array <br />

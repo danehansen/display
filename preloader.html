@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>Preloader</title>
+		<style type="text/css">
+			/*just for the documentation, doesn’t concern the Preloader class*/
+				body
+				{
+					background-color:#FFF;
+					color:#000;
+					font-family:Helvetica, Arial;
+					font-size:12px;
+					padding:50px;
+				}
+
+				body > div
+				{
+					width:600px;
+					padding:20px 0;
+					margin-top:30px;
+				}
+
+				body > div, footer
+				{
+					border-top:1px solid #000;
+				}
+
+				footer
+				{
+					padding-top:20px;
+				}
+			/*end documentation css*/
+
+
+			figure
+			{
+				width:200px;
+				height:200px;
+				position:relative;
+			}
+
+			#progressHolder
+			{
+				background-color:#EEE;
+			}
+
+				blink
+				{
+					opacity:0;
+					position:absolute;
+					width:100%;
+					height:100%;
+					text-align:center;
+					line-height:67px;
+					font-size:30px;
+					-webkit-animation: blink 1s step-end infinite;
+					animation: blink 1s step-end infinite
+					-webkit-transition:opacity 0.3s;
+    				transition:opacity 0.3s;
+				}
+
+				blink.show
+				{
+					opacity:1;
+				}
+
+				@-webkit-keyframes blink
+				{
+					67% { visibility:hidden }
+				}
+				
+				@keyframes blink
+				{
+					67% { visibility:hidden }
+				}
+			
+				canvas
+				{
+					width:100%;
+					height:100%;
+					position:absolute;
+				}
+		</style>
+	</head>
+	<body>
+		<h1>Preloader</h1>
+		<p><strong>Package</strong> : com.danehansen.display <br />
+		<strong>Class</strong> : public class Preloader <br />
+		<strong>Inheritance</strong> : Preloader > EventDispatcher > Object  </p>
+		<p>A preloader class designed to easily create a customizable animated canvas preloader. This class depends on TweenLite.js which is available at <a href="http://greensock.com/">http://greensock.com/</a> as well as EventDispatcher.js. It is assumed that it is desired that the canvas element will want to not be shown when the load is full, so either the canvas or the content to be shown after or both will have to have proper positioning added to it so that when the canvas has <code>display:none</code> applied to it that it won’t ruin your layout.</p>
+		<h2>Public Properties</h2>
+		<ul>
+			<li><strong>element</strong> : Element <br />
+			[Read-only] Canvas Element that the preloader is to be drawn in.</li>
+			<li><strong>duration</strong> : Number <br />
+			Duration for the Preloader to make 1 revolution.</li>
+		</ul>
+		<h2>Public Methods</h2>
+		<ul>
+			<li><strong>Preloader</strong>(element:Element, color:uint = "#000", hole:Number = 0, duration:Number = 1) <br />
+			Creates a Preloader object, using a provided canvas element, color to draw it in, and how big the hole in the center is in relation to the size of the Preloader. The size of the Preloader is the smallest between the width and height of the canvas. The duration is the amount of time, in seconds, for the Preloader to make 1 revolution.</li>
+			<li><strong>play</strong>() <br />
+			Causes the Preloader to begin looping, at the current duration. This method would be used when the user is waiting for something that would take an undetermined amount of time, such as waiting for a callback. They may see the Preloader animate through just a single time, or many times.</li>
+			<li><strong>progress</strong>(value:Number):* <br />
+			Gets or sets the instances’s progress. A value of 0 would have the Preloader look empty, 1 would have it look full, and 2 would have it look empty again.</li>
+			<li><strong>revolve</strong>() <br />
+			Causes the Preloader to make one revolution. This method would be used once the instance’s progress has reached 1, and it is desired for it to make 1 last revolution for it to disappear.</li>
+			<li><strong>stop</strong>() <br />
+			Causes the Preloader to stop looping at the next occurance that it will not be visible. This method would typically be used after calling the “play” method.</li>
+		</ul>
+		<h2>Public Constants</h2>
+		<ul>
+			<li><strong>COMPLETE</strong> : String = "complete" <br />
+			[static] The Preloader.COMPLETE constant defines the value of the type property of a complete event object.</li>
+		</ul>
+		<h2>Events</h2>
+		<ul>
+			<li><strong>complete</strong> <br />
+			Dispatched when the progress has reached a whole number when the instance is not currently playing.</li>
+		</ul>
+		<div>
+			<h2>EXAMPLE 1: WAITING FOR A CALLBACK</h2>
+			<figure>
+				<canvas id="auto"></canvas>
+				<blink id="autoContent">CONTENT! CONTENT! CONTENT!</blink>
+			</figure>
+			<pre><code>var autoPreloader=new Preloader(document.getElementById("auto"));</code></pre>
+			<button id="autoReceive">receive the callback</button>
+			<button id="autoReset">send for new callback</button>
+		</div>
+		<div>
+			<h2>EXAMPLE 2: SHOWING ACTUAL PROGRESS</h2>
+			<figure id="progressHolder">
+				<canvas id="progress"></canvas>
+				<blink id="progressContent">CONTENT! CONTENT! CONTENT!</blink>
+			</figure>
+			<pre><code>var progressPreloader=new Preloader(document.getElementById("progress"), "#F0F", 0.25);</code></pre>
+			<button id="progressDownload">simulate download</button>
+		</div>
+		<footer>author: Dane Hansen, <a href="mailto:dane@danehansen.com">dane@danehansen.com</a></footer>
+		<script src="http://cdnjs.cloudflare.com/ajax/libs/gsap/1.11.8/TweenLite.min.js"></script>
+		<script src="http://cdnjs.cloudflare.com/ajax/libs/gsap/1.11.8/TimelineLite.min.js"></script>
+		<script src='js/danehansen/events/EventDispatcher.js'></script>
+		<script src='js/danehansen/display/Preloader.js'></script>
+		<script>
+			(function(){
+				//auto
+					var autoPreloader=new Preloader(document.getElementById("auto"));
+					autoPreloader.addEventListener(Preloader.COMPLETE, onAutoComplete);
+					autoPreloader.play();
+					document.getElementById("autoReceive").addEventListener("click", function(){
+						autoPreloader.stop();
+					});
+					document.getElementById("autoReset").addEventListener("click", function(){
+						document.getElementById("autoContent").className="";
+						autoPreloader.play();
+					});
+					function onAutoComplete(evt)
+					{
+						document.getElementById("autoContent").className="show";
+					}
+					
+				//progress
+					var progressPreloader=new Preloader(document.getElementById("progress"), "#00F", 0.75);
+					progressPreloader.addEventListener(Preloader.COMPLETE, onProgressComplete);
+					var timeline;
+					var obj={};
+					var total;
+					document.getElementById("progressDownload").addEventListener("click", function(){
+						document.getElementById("progressContent").className="";
+						timeline=new TimelineLite({onUpdate:onProgress});
+						obj.value=0;
+						total=0;
+						for(var i=0; i<20; i++)
+						{
+							var rand=Math.random();
+							timeline.add(TweenLite.to(obj, Math.random(), {value:total+rand, ease:Cubic.easeInOut}));
+							total+=rand;
+						}
+					});
+					function onProgress(evt)
+					{
+						progressPreloader.progress(obj.value/total);
+						if(timeline.progress()==1)
+						{
+							progressPreloader.revolve();
+						}
+					}
+					function onProgressComplete(evt)
+					{
+						document.getElementById("progressContent").className="show";
+					}
+			})();
+		</script>
+	</body>
+</html>

@@ -123,7 +123,7 @@ __Package__ : com.danehansen.display
 __Class__ : public class ForwardRewind  
 __Inheritance__ : ForwardRewind > Sprite > EventDispatcher > Object  
 
-A class designed to quickly make an animated sprite play forward on mouse over, and reverse on mouse out. Great for rollover states on buttons. This class depends on TweenLite.js which is available at <http://greensock.com/> as well as Sprite.js. Instantiating it is almost exactly like its parent class, Sprite, minus the loop argument in the constructor as a ForwardRewind instance is designed to play only forward and back between 0 and 1.
+A class designed to quickly make an animated sprite play forward on mouse over, and reverse on mouse out. Great for rollover states on buttons. This class depends on TweenLite.js which is available at <http://greensock.com/> as well as Sprite.js and EventDispatcher.js. Instantiating it is almost exactly like its parent class, Sprite, minus the loop argument in the constructor as a ForwardRewind instance is designed to play only forward and back between 0 and 1.
 
 ##Public Methods##
 
@@ -140,7 +140,7 @@ __Package__ : com.danehansen.display
 __Class__ : public class ForwardForward  
 __Inheritance__ : ForwardForward > Sprite > EventDispatcher > Object  
 
-A class designed to quickly make an animated sprite play forward to a given frame on mouse over, and then continue to the end and back to the first frame on mouse out. Great for rollover states on buttons. This class depends on TweenLite.js which is available at <http://greensock.com/> as well as Sprite.js. Instantiating it is almost exactly like its parent class, Sprite, minus the loop argument in the constructor as a ForwardForward instance is designed to utilize a looping sprite sheet.
+A class designed to quickly make an animated sprite play forward to a given frame on mouse over, and then continue to the end and back to the first frame on mouse out. Great for rollover states on buttons. This class depends on TweenLite.js which is available at <http://greensock.com/> as well as Sprite.js and EventDispatcher.js. Instantiating it is almost exactly like its parent class, Sprite, minus the loop argument in the constructor as a ForwardForward instance is designed to utilize a looping sprite sheet.
 
 ##Public Methods##
 
@@ -159,7 +159,7 @@ __Package__ : com.danehansen.display
 __Class__ : public class SuperSprite  
 __Inheritance__ : SuperSprite > Sprite > EventDispatcher > Object  
 
-A sprite class designed for when you need to divide your sprite into several separate images. One reason for doing this would be if your sprite exceeds a total of 5 million pixels. Browsers (especially mobile) tend to have unpredictable behavior when a background image exceeds 5 million pixels. 
+A sprite class designed for when you need to divide your sprite into several separate images. One reason for doing this would be if your sprite exceeds a total of 5 million pixels. Browsers (especially mobile) tend to have unpredictable behavior when a background image exceeds 5 million pixels. This class depends on TweenLite.js which is available at <http://greensock.com/> as well as Sprite.js and EventDispatcher.js.
 
 ##Public Properties##
 
@@ -172,6 +172,44 @@ A sprite class designed for when you need to divide your sprite into several sep
 Creates a SuperSprite object, using an array of subsprites, whether it will loop or not, and the frame rate.
 * __resize__()  
 [override] Calls the resize method on all subsprites.
+
+#Preloader#
+
+__Package__ : com.danehansen.display  
+__Class__ : public class Preloader  
+__Inheritance__ : Preloader > EventDispatcher > Object  
+
+A preloader class designed to easily create a customizable animated canvas preloader. This class depends on TweenLite.js which is available at <http://greensock.com/> as well as EventDispatcher.js. It is assumed that it is desired that the canvas element will want to not be shown when the load is full, so either the canvas or the content to be shown after or both will have to have proper positioning added to it so that when the canvas has `display:none` applied to it that it won’t ruin your layout.
+
+##Public Properties##
+
+* __element__ : Element  
+[Read-only] Canvas Element that the preloader is to be drawn in.
+* __duration__ : Number  
+Duration for the Preloader to make 1 revolution.
+
+##Public Methods##
+
+* __Preloader__(element:Element, color:uint = "#000", hole:Number = 0, duration:Number = 1)  
+Creates a Preloader object, using a provided canvas element, color to draw it in, and how big the hole in the center is in relation to the size of the Preloader. The size of the Preloader is the smallest between the width and height of the canvas. The duration is the amount of time, in seconds, for the Preloader to make 1 revolution.
+* __play__()  
+Causes the Preloader to begin looping, at the current duration. This method would be used when the user is waiting for something that would take an undetermined amount of time, such as waiting for a callback. They may see the Preloader animate through just a single time, or many times.
+* __progress__(value:Number):*  
+Gets or sets the instances’s progress. A value of 0 would have the Preloader look empty, 1 would have it look full, and 2 would have it look empty again.
+* __revolve__()  
+Causes the Preloader to make one revolution. This method would be used once the instance’s progress has reached 1, and it is desired for it to make 1 last revolution for it to disappear.
+* __stop__()  
+Causes the Preloader to stop looping at the next occurance that it will not be visible. This method would typically be used after calling the “play” method.
+
+##Public Constants##
+
+* __COMPLETE__ : String = "complete"  
+[static] The Preloader.COMPLETE constant defines the value of the type property of a complete event object.
+
+##Events##
+
+* __complete__  
+Dispatched when the progress has reached a whole number when the instance is not currently playing.
 
 #Canvas#
 
