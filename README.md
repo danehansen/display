@@ -1,3 +1,50 @@
+#Glitch#
+
+__Package__ : com.danehansen.display  
+__Class__ : public class Glitch  
+__Inheritance__ : Glitch > Object  
+__Subclasses__ : AutoGlitch
+
+Instances of this class will take the image or element (with background image), and in real time glitch out the bytes of the image. No matter if the image is .jpg, .png, or .gif, it will by glitched like a .jpg becuase that is what looks the coolest. This effect will not work locally unless you set up a local server. Otherwise the canvas thinks it’s all tainted and craps out. Also, if you pull in an image from a different server, it will tain the canvas unless you make it think it’s coming from it’s own server, via a fpassthru or readfile (included) or some other serverside trickery.
+
+##Public Properties##
+
+* __element__ : Element  
+[Read-only] DOM Element manipulated.
+
+##Public Methods##
+
+* __Glitch__(element:Element)  
+Creates a Glitch object, using a provided image element or other element with a background-image applied.
+* __fucked__(value:int):*  
+Gets or sets the Glitch’s level of fucked. A low number like 1-3 usually results in a subtle glitching where you can still recognize the image. A higher number such as 50 can more likely distort the image until it is unrecognizable. A value of 0 returns the image to its whole self. Remember that this corruption is actually happening at random, so the results are completely unpredictable. There is a chance that a high fucked amount could still leave an image totally recognizable. Also a chance that a fucked amount of 1 could leave an image completely absent.
+
+#AutoGlitch#
+
+__Package__ : com.danehansen.display  
+__Class__ : public class AutoGlitch  
+__Inheritance__ : AutoGlitch > Glitch > Object 
+
+Instances of this class will automatically glitch out a random amount for random amounts of times 
+
+##Public Properties##
+
+* __cleanTime__ : Number  
+Maximum duration in milliseconds that the image will remain clean while activated.
+* __glitchTime__ : Number  
+Maximum duration in milliseconds that the image will remain glitched while activated.
+* __fuckLimit__ : uint  
+Maximum amount of fucked that the image will get while activated.
+
+##Public Methods##
+
+* __AutoGlitch__(element:Element, cleanTime:Number = 1500, glitchTime:Number = 100, fuckLimit:uint = 5)  
+Creates an AutoGlitch object, using a provided image element or other element with a background-image applied.
+* __activate__()  
+Activates the instance, starts the glitching timeouts.
+* __deactivate__()  
+Deactivates the instance by killing the timeouts and returning the image to its clean state.
+
 #Sprite#
 
 __Package__ : com.danehansen.display  
@@ -18,6 +65,8 @@ In addition to TweenLite, a certain amount of css styling will have to be applie
 
 ##Public Properties##
 
+* __ease__ : Function  
+Easing method used to move playhead. Set to Linear.easeNone by default.
 * __element__ : Element  
 [Read-only] DOM Element manipulated.
 * __frameRate__ : unit  
@@ -123,3 +172,25 @@ A sprite class designed for when you need to divide your sprite into several sep
 Creates a SuperSprite object, using an array of subsprites, whether it will loop or not, and the frame rate.
 * __resize__()  
 [override] Calls the resize method on all subsprites.
+
+#Canvas#
+
+__Package__ : com.danehansen.display  
+__Class__ : public class Canvas  
+__Inheritance__ : Canvas > Object  
+
+A helper class for working with the HTML5 canvas with not that very many shortcuts.
+
+##Public Properties##
+
+* __element__ : Element  
+[Read-only] DOM Element manipulated.
+
+##Public Methods##
+
+* __Canvas__(element:Element)  
+Creates a Canvas object, using the provided canvas element. It bases the sizing off the size of the element from its css properties.
+* __Canvas__(width:uint, height:uint)  
+Creates a Canvas object, using the provided height and width.
+* __correctArcs__()  
+[static] Overrides the browser’s default arc method with one that looks more correct. Only needed if drawing several arcs/circles that need to align closely. The bug seems to only exist in Chrome currently, and hopefully in time this polyfill will no longer be needed.

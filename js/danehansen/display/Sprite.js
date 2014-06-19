@@ -3,7 +3,8 @@
 //////////////////////////////////////////////////
 //author:Dane Hansen/////////////////////////////
 //www.danehansen.com////////////////////////////
-///////////////////////////////////////////////
+//version:1.0.0////////////////////////////////
+//////////////////////////////////////////////
 
 	//requires greensock/TweenLite.js
 	//requires danehansen/events/EventDispatcher.js
@@ -24,6 +25,7 @@ function Sprite(element, columns, frames, loop, frameRate)
 	this._frame=0;
 	this._actualFrame=0;
 	this._dest=null;
+	this.ease=Linear.easeNone;
 	
 	this.resize=this.resize.bind(this);
 	this.progress=this.progress.bind(this);
@@ -99,7 +101,7 @@ Sprite.prototype.progressTo=function(num, _loopDir)
 	{
 		this._dest=num;
 		var dur=Math.abs(num-this._progress)*this._frames/this.frameRate;
-		TweenLite.to(this, dur, {progress:num, ease:Linear.easeNone, onComplete:this._resetDest, onCompleteScope:this, onCompleteParams:[_loopDir]});
+		TweenLite.to(this, dur, {progress:num, ease:this.ease, onComplete:this._resetDest, onCompleteScope:this, onCompleteParams:[_loopDir]});
 	}
 }
 
