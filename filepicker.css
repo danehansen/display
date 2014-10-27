@@ -1,0 +1,402 @@
+@charset "UTF-8";
+* {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+/* v2.0 | 20110126
+  http://meyerweb.com/eric/tools/css/reset/ 
+  License: none (public domain)
+*/
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section {
+  display: block;
+}
+
+body {
+  -webkit-text-size-adjust: none;
+  line-height: 1;
+}
+
+ol, ul {
+  list-style: none;
+}
+
+blockquote, q {
+  quotes: none;
+}
+
+blockquote:before, blockquote:after, q:before, q:after {
+  content: '';
+  content: none;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+input, textarea {
+  border: none;
+  margin: 0;
+  padding: 0;
+  font-size: inherit;
+  font-family: inherit;
+  color: inherit;
+  vertical-align: top;
+}
+
+textarea {
+  resize: none;
+}
+
+select {
+  border: 0;
+  outline: 0;
+  font-family: inherit;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  font-size: inherit;
+}
+
+select:-moz-focusring {
+  color: transparent;
+  text-shadow: 0 0 0 #000;
+}
+
+strong {
+  font-weight: normal;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+  -webkit-transition: 0.2s;
+  -moz-transition: 0.2s;
+  transition: 0.2s;
+}
+
+a:focus, a:visited, button:focus, textarea:focus, input:focus, input:active {
+  outline: none;
+}
+
+input:invalid {
+  box-shadow: none;
+}
+
+li {
+  vertical-align: top;
+}
+
+button {
+  text-align: inherit;
+  margin: 0;
+  font-family: inherit;
+  font-size: inherit;
+  border: none;
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+  padding: 0;
+  line-height: inherit;
+  text-transform: inherit;
+  -webkit-transition: 0.2s;
+  -moz-transition: 0.2s;
+  transition: 0.2s;
+  vertical-align: top;
+}
+
+/* $upvote:#ff8b60;
+$lightBlue:#cee3f8;
+$neutral:#c6c6c6;
+$downvote:#9494ff;
+$lightBG:#eff7ff;
+$uiText:#336699; */
+@font-face {
+  font-family: "OpenSans";
+  src: url("https://redditmade-static.s3.amazonaws.com/fonts/open-sans/OpenSans-Regular-webfont.eot");
+  /* IE9 Compat Modes */
+  src: url("https://redditmade-static.s3.amazonaws.com/fonts/open-sans/OpenSans-Regular-webfont.eot?#iefix") format("embedded-opentype"), url("https://redditmade-static.s3.amazonaws.com/fonts/open-sans/OpenSans-Regular-webfont.woff") format("woff"), url("https://redditmade-static.s3.amazonaws.com/fonts/open-sans/OpenSans-Regular-webfont.ttf") format("truetype"), url("https://redditmade-static.s3.amazonaws.com/fonts/open-sans/OpenSans-Regular-webfont.svg#OpenSans") format("svg");
+  /* Legacy iOS */
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+}
+@font-face {
+  font-family: "OpenSans";
+  src: url("https://redditmade-static.s3.amazonaws.com/fonts/open-sans/OpenSans-Italic-webfont.eot");
+  /* IE9 Compat Modes */
+  src: url("https://redditmade-static.s3.amazonaws.com/fonts/open-sans/OpenSans-Italic-webfont.eot?#iefix") format("embedded-opentype"), url("https://redditmade-static.s3.amazonaws.com/fonts/open-sans/OpenSans-Italic-webfont.woff") format("woff"), url("https://redditmade-static.s3.amazonaws.com/fonts/open-sans/OpenSans-Italic-webfont.ttf") format("truetype"), url("https://redditmade-static.s3.amazonaws.com/fonts/open-sans/OpenSans-Italic-webfont.svg#OpenSans") format("svg");
+  /* Legacy iOS */
+  font-weight: normal;
+  font-style: italic;
+  font-stretch: normal;
+}
+@font-face {
+  font-family: "OpenSans";
+  src: url("https://redditmade-static.s3.amazonaws.com/fonts/open-sans/OpenSans-Bold-webfont.eot");
+  /* IE9 Compat Modes */
+  src: url("https://redditmade-static.s3.amazonaws.com/fonts/open-sans/OpenSans-Bold-webfont.eot?#iefix") format("embedded-opentype"), url("https://redditmade-static.s3.amazonaws.com/fonts/open-sans/OpenSans-Bold-webfont.woff") format("woff"), url("https://redditmade-static.s3.amazonaws.com/fonts/open-sans/OpenSans-Bold-webfont.ttf") format("truetype"), url("https://redditmade-static.s3.amazonaws.com/fonts/open-sans/OpenSans-Bold-webfont.svg#OpenSans") format("svg");
+  /* Legacy iOS */
+  font-weight: bold;
+  font-style: normal;
+  font-stretch: normal;
+}
+@font-face {
+  font-family: "OpenSans";
+  src: url("https://redditmade-static.s3.amazonaws.com/fonts/open-sans/OpenSans-BoldItalic-webfont.eot");
+  /* IE9 Compat Modes */
+  src: url("https://redditmade-static.s3.amazonaws.com/fonts/open-sans/OpenSans-BoldItalic-webfont.eot?#iefix") format("embedded-opentype"), url("https://redditmade-static.s3.amazonaws.com/fonts/open-sans/OpenSans-BoldItalic-webfont.woff") format("woff"), url("https://redditmade-static.s3.amazonaws.com/fonts/open-sans/OpenSans-BoldItalic-webfont.ttf") format("truetype"), url("https://redditmade-static.s3.amazonaws.com/fonts/open-sans/OpenSans-BoldItalic-webfont.svg#OpenSans") format("svg");
+  /* Legacy iOS */
+  font-weight: bold;
+  font-style: italic;
+  font-stretch: normal;
+}
+@font-face {
+  font-family: "fontello";
+  src: url("https://redditmade-static.s3.amazonaws.com/fonts/fontello.eot");
+  /* IE9 Compat Modes */
+  src: url("https://redditmade-static.s3.amazonaws.com/fonts/fontello.eot?#iefix") format("embedded-opentype"), url("https://redditmade-static.s3.amazonaws.com/fonts/fontello.woff") format("woff"), url("https://redditmade-static.s3.amazonaws.com/fonts/fontello.ttf") format("truetype"), url("https://redditmade-static.s3.amazonaws.com/fonts/fontello.svg#fontello") format("svg");
+  /* Legacy iOS */
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+}
+[class^="icon-"]:before, [class*=" icon-"]:before {
+  font-family: "fontello";
+  font-style: normal;
+  font-weight: normal;
+  speak: none;
+  display: inline-block;
+  text-decoration: inherit;
+  width: 1em;
+  margin-right: .2em;
+  text-align: center;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1em;
+  margin-left: .2em;
+}
+
+.icon-twitter:before {
+  content: '\e800';
+}
+
+/* '' */
+.icon-facebook:before {
+  content: '\e801';
+}
+
+/* '' */
+.icon-pinterest-circled:before {
+  content: '\e802';
+}
+
+/* '' */
+.icon-instagramm:before {
+  content: '\e803';
+}
+
+/* '' */
+.icon-chat:before {
+  content: '\e804';
+}
+
+/* '' */
+.icon-mail-alt:before {
+  content: '\e805';
+}
+
+/* '' */
+.icon-user:before {
+  content: '\e806';
+}
+
+/* '' */
+.icon-down-micro:before {
+  content: '\e807';
+}
+
+/* '' */
+.icon-gplus-squared:before {
+  content: '\e808';
+}
+
+/* '' */
+.icon-twitter-squared:before {
+  content: '\e809';
+}
+
+/* '' */
+.icon-facebook-squared:before {
+  content: '\e80a';
+}
+
+/* '' */
+.icon-pinterest-squared:before {
+  content: '\e80b';
+}
+
+/* '' */
+.icon-reddit-squared:before {
+  content: '\e80c';
+}
+
+/* '' */
+.button, body #content .row-fluid #servicePane #mainpane .row-fluid #pickerComputer .center #fileUploadForm #fileInputContainer a {
+  font-weight: bold;
+  display: inline-block;
+  color: white;
+  border-radius: 10px;
+  padding: 0 25px;
+  height: 40px;
+  line-height: 40px;
+  background-color: #1fc4dd;
+  font-size: 18px;
+  text-align: center;
+  margin-bottom: 20px;
+  position: relative;
+  box-shadow: 0 3px 0 0 #0497c0;
+  transform: translateY(-2px);
+  -webkit-transition: box-shadow 0.1s, -webkit-transform 0.1s, background-color 0.3s;
+  -moz-transition: box-shadow 0.1s, -moz-transform 0.1s, background-color 0.3s;
+  transition: box-shadow 0.1s, transform 0.1s, background-color 0.3s;
+}
+.button .text, body #content .row-fluid #servicePane #mainpane .row-fluid #pickerComputer .center #fileUploadForm #fileInputContainer a .text {
+  -webkit-transition: 0.5s;
+  -moz-transition: 0.5s;
+  transition: 0.5s;
+}
+.button .confirm, body #content .row-fluid #servicePane #mainpane .row-fluid #pickerComputer .center #fileUploadForm #fileInputContainer a .confirm {
+  display: none;
+  position: absolute;
+  width: 0;
+  height: 100%;
+  overflow: hidden;
+  left: 0;
+  white-space: nowrap;
+}
+.button canvas, body #content .row-fluid #servicePane #mainpane .row-fluid #pickerComputer .center #fileUploadForm #fileInputContainer a canvas {
+  position: absolute;
+  width: calc(100% - 6px);
+  height: calc(100% - 6px);
+  left: 0;
+  margin: 3px;
+}
+.button + .button, body #content .row-fluid #servicePane #mainpane .row-fluid #pickerComputer .center #fileUploadForm #fileInputContainer a + .button, body #content .row-fluid #servicePane #mainpane .row-fluid #pickerComputer .center #fileUploadForm #fileInputContainer .button + a, body #content .row-fluid #servicePane #mainpane .row-fluid #pickerComputer .center #fileUploadForm #fileInputContainer a + a {
+  margin-left: 20px;
+}
+.button:not(.disabled):not([disabled]):hover, body #content .row-fluid #servicePane #mainpane .row-fluid #pickerComputer .center #fileUploadForm #fileInputContainer a:not(.disabled):not([disabled]):hover {
+  background-color: #3af1fa;
+  box-shadow: 0 1px 0 0 #1fc4dd;
+  transform: translateY(0px);
+}
+.button:not(.disabled):not([disabled]):hover.gray, body #content .row-fluid #servicePane #mainpane .row-fluid #pickerComputer .center #fileUploadForm #fileInputContainer a:not(.disabled):not([disabled]):hover.gray {
+  box-shadow: 0 1px 0 0 #757575;
+}
+.button:not(.disabled):not([disabled]):hover.warning, body #content .row-fluid #servicePane #mainpane .row-fluid #pickerComputer .center #fileUploadForm #fileInputContainer a:not(.disabled):not([disabled]):hover.warning {
+  background-color: #ff7700;
+  box-shadow: 0 1px 0 0 #ff5700;
+}
+.button.gray, body #content .row-fluid #servicePane #mainpane .row-fluid #pickerComputer .center #fileUploadForm #fileInputContainer a.gray {
+  background-color: #cccccc;
+  box-shadow: 0 3px 0 0 #757575;
+}
+.button.warning, body #content .row-fluid #servicePane #mainpane .row-fluid #pickerComputer .center #fileUploadForm #fileInputContainer a.warning {
+  background-color: #ff5700;
+  box-shadow: 0 3px 0 0 #ff1e00;
+}
+.button.gray:not(.disabled):not([disabled]):hover, body #content .row-fluid #servicePane #mainpane .row-fluid #pickerComputer .center #fileUploadForm #fileInputContainer a.gray:not(.disabled):not([disabled]):hover {
+  background-color: #cccccc;
+}
+.button.warning:not(.disabled):not([disabled]):hover, body #content .row-fluid #servicePane #mainpane .row-fluid #pickerComputer .center #fileUploadForm #fileInputContainer a.warning:not(.disabled):not([disabled]):hover {
+  background-color: #ff9000;
+}
+.button.disabled, body #content .row-fluid #servicePane #mainpane .row-fluid #pickerComputer .center #fileUploadForm #fileInputContainer a.disabled, .button[disabled], body #content .row-fluid #servicePane #mainpane .row-fluid #pickerComputer .center #fileUploadForm #fileInputContainer a[disabled] {
+  background-color: #e9e9e9;
+  box-shadow: 0 3px 0 0 #cccccc;
+  cursor: default;
+  /* &:hover
+  {
+  	top:($buttonDist/2-1)+px;
+  	box-shadow:0 1px 0 0 $grayMedium;
+  } */
+}
+.button.confirm, body #content .row-fluid #servicePane #mainpane .row-fluid #pickerComputer .center #fileUploadForm #fileInputContainer a.confirm {
+  background-color: orangered;
+  box-shadow: 0 3px 0 0 #ff1300;
+}
+.button.noText .text, body #content .row-fluid #servicePane #mainpane .row-fluid #pickerComputer .center #fileUploadForm #fileInputContainer a.noText .text {
+  opacity: 0;
+}
+
+body #content .row-fluid #servicePane #services {
+  background-color: inherit;
+  box-shadow: none;
+  border-radius: 10px;
+  border: 1px solid #cccccc;
+  height: auto;
+}
+body #content .row-fluid #servicePane #services li a.active {
+  border-left: none;
+  padding-left: 15px;
+}
+body #content .row-fluid #servicePane #services li a:hover {
+  border-left: none;
+  padding-left: 15px;
+}
+body #content .row-fluid #servicePane #services li a i {
+  margin-right: 5px;
+}
+body #content .row-fluid #servicePane .subbranding {
+  display: none;
+}
+body #content .row-fluid #servicePane #mainpane .row-fluid #pickerComputer #localDragDrop {
+  border-radius: 10px;
+  border: 1px solid #cccccc;
+}
+body #content .row-fluid #servicePane #mainpane .row-fluid #pickerComputer #localDragDrop .uploadProgress {
+  background-color: inherit;
+  border-radius: 10px;
+  border: 1px solid #cccccc;
+}
+body #content .row-fluid #servicePane #mainpane .row-fluid #pickerComputer #localDragDrop .uploadProgress .progress {
+  height: 20px;
+  border-radius: 10px;
+  background-color: white;
+  box-shadow: inset 0 3px 7px 0 rgba(0, 0, 0, 0.15);
+}
+body #content .row-fluid #servicePane #mainpane .row-fluid #pickerComputer #localDragDrop .uploadProgress .progress .bar {
+  background-image: linear-gradient(to right, #c0ea48 0, #9de244 100%);
+}
+body #content .row-fluid #servicePane #mainpane .row-fluid #pickerComputer #localDragDrop .uploadProgress .fileinfo {
+  font-size: 16;
+}
+body #content .row-fluid #servicePane #mainpane .row-fluid #pickerComputer #localDragDrop .uploadProgress .fileinfo .badge-inverse {
+  background-color: inherit;
+  color: inherit;
+}
+body #content .row-fluid #servicePane #mainpane .row-fluid #pickerComputer .center #fileUploadForm .control-label {
+  font-size: inherit;
+}
+body #content .row-fluid #servicePane #mainpane .row-fluid #pickerComputer .center #fileUploadForm #fileInputContainer a {
+  border: none;
+  width: auto;
+  background-image: none;
+}
+body #content .row-fluid #servicePane #mainpane .row-fluid #pickerComputer .center #fileUploadForm #fileInputContainer a:hover {
+  background-color: #3af1fa;
+}
+
+/*# sourceMappingURL=filepicker.css.map */

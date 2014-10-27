@@ -71,3 +71,31 @@ Canvas.correctArcs=function()
 			this.quadraticCurveTo(x + cpRadius * Math.cos(a2), y + cpRadius * Math.sin(a2), x + radius * Math.cos(a), y + radius * Math.sin(a));
 	}
 }
+
+Canvas._textHeights={};
+Canvas.textHeight=function(font, size, weight)
+{
+	weight=weight||"normal";
+	var key=font+size+weight;
+	var height=Canvas._textHeights[key];
+	if(height)
+	{
+		return height;
+	}
+	else
+	{
+		var div=document.createElement("div");
+		div.innerHTML="MWOQbdfghijklpqty";
+		div.style.position="absolute";
+		div.style.top="-100px";
+		div.style.left="-100px";
+		div.style.fontFamily=font;
+		div.style.fontWeight=weight;
+		div.style.fontSize=size+(typeof size=="number"?"px":"");
+		document.body.appendChild(div);
+		height=div.offsetHeight;
+		document.body.removeChild(div);
+		Canvas._textHeights[key]=height;
+		return height;
+	}
+}
