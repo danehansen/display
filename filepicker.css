@@ -23,7 +23,7 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
   display: block;
 }
 
-body {
+{
   -webkit-text-size-adjust: none;
   line-height: 1;
 }
@@ -254,7 +254,7 @@ $uiText:#336699; */
 }
 
 /* '' */
-.button, body #content .row-fluid #servicePane #mainpane .row-fluid #pickerComputer .center #fileUploadForm #fileInputContainer a {
+.button, #content .row-fluid #servicePane #mainpane .row-fluid #pickerComputer .center #fileUploadForm #fileInputContainer a {
   font-weight: bold;
   display: inline-block;
   color: white;
@@ -273,12 +273,12 @@ $uiText:#336699; */
   -moz-transition: box-shadow 0.1s, -moz-transform 0.1s, background-color 0.3s;
   transition: box-shadow 0.1s, transform 0.1s, background-color 0.3s;
 }
-.button .text, body #content .row-fluid #servicePane #mainpane .row-fluid #pickerComputer .center #fileUploadForm #fileInputContainer a .text {
+.button .text, #content .row-fluid #servicePane #mainpane .row-fluid #pickerComputer .center #fileUploadForm #fileInputContainer a .text {
   -webkit-transition: 0.5s;
   -moz-transition: 0.5s;
   transition: 0.5s;
 }
-.button .confirm, body #content .row-fluid #servicePane #mainpane .row-fluid #pickerComputer .center #fileUploadForm #fileInputContainer a .confirm {
+.button .confirm, #content .row-fluid #servicePane #mainpane .row-fluid #pickerComputer .center #fileUploadForm #fileInputContainer a .confirm {
   display: none;
   position: absolute;
   width: 0;
@@ -287,43 +287,43 @@ $uiText:#336699; */
   left: 0;
   white-space: nowrap;
 }
-.button canvas, body #content .row-fluid #servicePane #mainpane .row-fluid #pickerComputer .center #fileUploadForm #fileInputContainer a canvas {
+.button canvas, #content .row-fluid #servicePane #mainpane .row-fluid #pickerComputer .center #fileUploadForm #fileInputContainer a canvas {
   position: absolute;
   width: calc(100% - 6px);
   height: calc(100% - 6px);
   left: 0;
   margin: 3px;
 }
-.button + .button, body #content .row-fluid #servicePane #mainpane .row-fluid #pickerComputer .center #fileUploadForm #fileInputContainer a + .button, body #content .row-fluid #servicePane #mainpane .row-fluid #pickerComputer .center #fileUploadForm #fileInputContainer .button + a, body #content .row-fluid #servicePane #mainpane .row-fluid #pickerComputer .center #fileUploadForm #fileInputContainer a + a {
+.button + .button, #content .row-fluid #servicePane #mainpane .row-fluid #pickerComputer .center #fileUploadForm #fileInputContainer a + .button, #content .row-fluid #servicePane #mainpane .row-fluid #pickerComputer .center #fileUploadForm #fileInputContainer .button + a, #content .row-fluid #servicePane #mainpane .row-fluid #pickerComputer .center #fileUploadForm #fileInputContainer a + a {
   margin-left: 20px;
 }
-.button:not(.disabled):not([disabled]):hover, body #content .row-fluid #servicePane #mainpane .row-fluid #pickerComputer .center #fileUploadForm #fileInputContainer a:not(.disabled):not([disabled]):hover {
+.button:not(.disabled):not([disabled]):hover, #content .row-fluid #servicePane #mainpane .row-fluid #pickerComputer .center #fileUploadForm #fileInputContainer a:not(.disabled):not([disabled]):hover {
   background-color: #3af1fa;
   box-shadow: 0 1px 0 0 #1fc4dd;
   transform: translateY(0px);
 }
-.button:not(.disabled):not([disabled]):hover.gray, body #content .row-fluid #servicePane #mainpane .row-fluid #pickerComputer .center #fileUploadForm #fileInputContainer a:not(.disabled):not([disabled]):hover.gray {
+.button:not(.disabled):not([disabled]):hover.gray, #content .row-fluid #servicePane #mainpane .row-fluid #pickerComputer .center #fileUploadForm #fileInputContainer a:not(.disabled):not([disabled]):hover.gray {
   box-shadow: 0 1px 0 0 #757575;
 }
-.button:not(.disabled):not([disabled]):hover.warning, body #content .row-fluid #servicePane #mainpane .row-fluid #pickerComputer .center #fileUploadForm #fileInputContainer a:not(.disabled):not([disabled]):hover.warning {
+.button:not(.disabled):not([disabled]):hover.warning, #content .row-fluid #servicePane #mainpane .row-fluid #pickerComputer .center #fileUploadForm #fileInputContainer a:not(.disabled):not([disabled]):hover.warning {
   background-color: #ff7700;
   box-shadow: 0 1px 0 0 #ff5700;
 }
-.button.gray, body #content .row-fluid #servicePane #mainpane .row-fluid #pickerComputer .center #fileUploadForm #fileInputContainer a.gray {
+.button.gray, #content .row-fluid #servicePane #mainpane .row-fluid #pickerComputer .center #fileUploadForm #fileInputContainer a.gray {
   background-color: #cccccc;
   box-shadow: 0 3px 0 0 #757575;
 }
-.button.warning, body #content .row-fluid #servicePane #mainpane .row-fluid #pickerComputer .center #fileUploadForm #fileInputContainer a.warning {
+.button.warning, #content .row-fluid #servicePane #mainpane .row-fluid #pickerComputer .center #fileUploadForm #fileInputContainer a.warning {
   background-color: #ff5700;
   box-shadow: 0 3px 0 0 #ff1e00;
 }
-.button.gray:not(.disabled):not([disabled]):hover, body #content .row-fluid #servicePane #mainpane .row-fluid #pickerComputer .center #fileUploadForm #fileInputContainer a.gray:not(.disabled):not([disabled]):hover {
+.button.gray:not(.disabled):not([disabled]):hover, #content .row-fluid #servicePane #mainpane .row-fluid #pickerComputer .center #fileUploadForm #fileInputContainer a.gray:not(.disabled):not([disabled]):hover {
   background-color: #cccccc;
 }
-.button.warning:not(.disabled):not([disabled]):hover, body #content .row-fluid #servicePane #mainpane .row-fluid #pickerComputer .center #fileUploadForm #fileInputContainer a.warning:not(.disabled):not([disabled]):hover {
+.button.warning:not(.disabled):not([disabled]):hover, #content .row-fluid #servicePane #mainpane .row-fluid #pickerComputer .center #fileUploadForm #fileInputContainer a.warning:not(.disabled):not([disabled]):hover {
   background-color: #ff9000;
 }
-.button.disabled, body #content .row-fluid #servicePane #mainpane .row-fluid #pickerComputer .center #fileUploadForm #fileInputContainer a.disabled, .button[disabled], body #content .row-fluid #servicePane #mainpane .row-fluid #pickerComputer .center #fileUploadForm #fileInputContainer a[disabled] {
+.button.disabled, #content .row-fluid #servicePane #mainpane .row-fluid #pickerComputer .center #fileUploadForm #fileInputContainer a.disabled, .button[disabled], #content .row-fluid #servicePane #mainpane .row-fluid #pickerComputer .center #fileUploadForm #fileInputContainer a[disabled] {
   background-color: #e9e9e9;
   box-shadow: 0 3px 0 0 #cccccc;
   cursor: default;
@@ -333,68 +333,68 @@ $uiText:#336699; */
   	box-shadow:0 1px 0 0 $grayMedium;
   } */
 }
-.button.confirm, body #content .row-fluid #servicePane #mainpane .row-fluid #pickerComputer .center #fileUploadForm #fileInputContainer a.confirm {
+.button.confirm, #content .row-fluid #servicePane #mainpane .row-fluid #pickerComputer .center #fileUploadForm #fileInputContainer a.confirm {
   background-color: orangered;
   box-shadow: 0 3px 0 0 #ff1300;
 }
-.button.noText .text, body #content .row-fluid #servicePane #mainpane .row-fluid #pickerComputer .center #fileUploadForm #fileInputContainer a.noText .text {
+.button.noText .text, #content .row-fluid #servicePane #mainpane .row-fluid #pickerComputer .center #fileUploadForm #fileInputContainer a.noText .text {
   opacity: 0;
 }
 
-body #content .row-fluid #servicePane #services {
+#content .row-fluid #servicePane #services {
   background-color: inherit;
   box-shadow: none;
   border-radius: 10px;
   border: 1px solid #cccccc;
   height: auto;
 }
-body #content .row-fluid #servicePane #services li a.active {
+#content .row-fluid #servicePane #services li a.active {
   border-left: none;
   padding-left: 15px;
 }
-body #content .row-fluid #servicePane #services li a:hover {
+#content .row-fluid #servicePane #services li a:hover {
   border-left: none;
   padding-left: 15px;
 }
-body #content .row-fluid #servicePane #services li a i {
+#content .row-fluid #servicePane #services li a i {
   margin-right: 5px;
 }
-body #content .row-fluid #servicePane .subbranding {
+#content .row-fluid #servicePane .subbranding {
   display: none;
 }
-body #content .row-fluid #servicePane #mainpane .row-fluid #pickerComputer #localDragDrop {
+#content .row-fluid #servicePane #mainpane .row-fluid #pickerComputer #localDragDrop {
   border-radius: 10px;
   border: 1px solid #cccccc;
 }
-body #content .row-fluid #servicePane #mainpane .row-fluid #pickerComputer #localDragDrop .uploadProgress {
+#content .row-fluid #servicePane #mainpane .row-fluid #pickerComputer #localDragDrop .uploadProgress {
   background-color: inherit;
   border-radius: 10px;
   border: 1px solid #cccccc;
 }
-body #content .row-fluid #servicePane #mainpane .row-fluid #pickerComputer #localDragDrop .uploadProgress .progress {
+#content .row-fluid #servicePane #mainpane .row-fluid #pickerComputer #localDragDrop .uploadProgress .progress {
   height: 20px;
   border-radius: 10px;
   background-color: white;
   box-shadow: inset 0 3px 7px 0 rgba(0, 0, 0, 0.15);
 }
-body #content .row-fluid #servicePane #mainpane .row-fluid #pickerComputer #localDragDrop .uploadProgress .progress .bar {
+#content .row-fluid #servicePane #mainpane .row-fluid #pickerComputer #localDragDrop .uploadProgress .progress .bar {
   background-image: linear-gradient(to right, #c0ea48 0, #9de244 100%);
 }
-body #content .row-fluid #servicePane #mainpane .row-fluid #pickerComputer #localDragDrop .uploadProgress .fileinfo {
+#content .row-fluid #servicePane #mainpane .row-fluid #pickerComputer #localDragDrop .uploadProgress .fileinfo {
   font-size: 16;
 }
-body #content .row-fluid #servicePane #mainpane .row-fluid #pickerComputer #localDragDrop .uploadProgress .fileinfo .badge-inverse {
+#content .row-fluid #servicePane #mainpane .row-fluid #pickerComputer #localDragDrop .uploadProgress .fileinfo .badge-inverse {
   background-color: inherit;
   color: inherit;
 }
-body #content .row-fluid #servicePane #mainpane .row-fluid #pickerComputer .center #fileUploadForm .control-label {
+#content .row-fluid #servicePane #mainpane .row-fluid #pickerComputer .center #fileUploadForm .control-label {
   font-size: inherit;
 }
-body #content .row-fluid #servicePane #mainpane .row-fluid #pickerComputer .center #fileUploadForm #fileInputContainer a {
+#content .row-fluid #servicePane #mainpane .row-fluid #pickerComputer .center #fileUploadForm #fileInputContainer a {
   border: none;
   width: auto;
   background-image: none;
 }
-body #content .row-fluid #servicePane #mainpane .row-fluid #pickerComputer .center #fileUploadForm #fileInputContainer a:hover {
+#content .row-fluid #servicePane #mainpane .row-fluid #pickerComputer .center #fileUploadForm #fileInputContainer a:hover {
   background-color: #3af1fa;
 }
