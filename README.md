@@ -232,3 +232,22 @@ Creates a Canvas object, using the provided canvas element. It bases the sizing 
 Creates a Canvas object, using the provided height and width.
 * __correctArcs__()  
 [static] Overrides the browser’s default arc method with one that looks more correct. Only needed if drawing several arcs/circles that need to align closely. The bug seems to only exist in Chrome currently, and hopefully in time this polyfill will no longer be needed.
+
+#Parallax#
+
+__Package__ : com.danehansen.display  
+__Class__ : public class Parallax  
+__Inheritance__ : Parallax > Object  
+
+A class for parallaxing based on mouse position or device orientation.
+
+##Public Methods##
+
+* __Parallax__(element:Element, speed:Number = 0.2)  
+Creates a Parallax object, using the DOM element or jQuery object.
+* __pause__()  
+Causes the Parallax instance to temporarity cease functioning.
+* __resume__()  
+Resumes a paused Parallax instance’s functionality.
+* __destroy__()  
+Cleans up the instance when it is no longer needed.

@@ -51,7 +51,7 @@ SuperSprite.prototype._showFrame=function(integer)
 
 SuperSprite.prototype.resize=function()
 {
-	for(var i=0, iLen=sprites.length; i<iLen; i++)
+	for(var i=0, iLen=this.sprites.length; i<iLen; i++)
 	{
 		var sprite=this.sprites[i];
 		if(sprite!=this._spriteShowing)

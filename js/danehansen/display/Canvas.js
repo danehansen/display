@@ -1,5 +1,5 @@
 "use strict";
-	
+
 //////////////////////////////////////////////////
 //author:Dane Hansen/////////////////////////////
 //www.danehansen.com////////////////////////////
@@ -73,10 +73,14 @@ Canvas.correctArcs=function()
 }
 
 Canvas._textHeights={};
-Canvas.textHeight=function(font, size, weight)
+Canvas.textHeight=function(family, size, weight, style, variant)
 {
+	if(typeof size=="number")
+		size+="px";
 	weight=weight||"normal";
-	var key=font+size+weight;
+	style=style||"normal";
+	variant=variant||"normal";
+	var key=escape(family+size+weight+style+variant);
 	var height=Canvas._textHeights[key];
 	if(height)
 	{
@@ -89,7 +93,7 @@ Canvas.textHeight=function(font, size, weight)
 		div.style.position="absolute";
 		div.style.top="-100px";
 		div.style.left="-100px";
-		div.style.fontFamily=font;
+		div.style.fontFamily=family;
 		div.style.fontWeight=weight;
 		div.style.fontSize=size+(typeof size=="number"?"px":"");
 		document.body.appendChild(div);
@@ -98,4 +102,35 @@ Canvas.textHeight=function(font, size, weight)
 		Canvas._textHeights[key]=height;
 		return height;
 	}
+}
+
+Canvas._ctx=null;
+Canvas._textWidths={};
+Canvas.textWidth=function(str, family, size, weight, style, variant)
+{
+	if(typeof size=="number")
+		size+="px";
+	weight=weight||"normal";
+	style=style||"normal";
+	variant=variant||"normal";
+	var key=escape(str+family+size+weight+style+variant);
+	var width=Canvas._textWidths[key];
+	if(width)
+	{
+		return width;
+	}
+	else
+	{
+		if(!Canvas._ctx)
+			Canvas._ctx=document.createElement("canvas").getContext("2d");
+		Canvas._ctx.font=style+" "+variant+" "+weight+" "+size+" "+family;
+		width=Canvas._ctx.measureText(str).width;
+		Canvas._textWidths[key]=width;
+		return width;
+	}
+}
+
+Canvas.measureText=function(str, family, size, weight, style, variant)
+{
+	return {width:Canvas.textWidth(str, family, size, weight, style, variant), height:Canvas.textHeight(family, size, weight, style, variant)};
 }
