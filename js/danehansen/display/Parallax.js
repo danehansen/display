@@ -12,10 +12,12 @@
 
 	window.Parallax=function(parent, speed)
 	{
-		this._parent=parent.addEventListener?parent:parent[0];
+		if(typeof jQuery!="undefined" && parent instanceof jQuery)
+			parent=parent[0];
+		this._parent=parent.documentElement?parent.documentElement:parent;
 		this.speed=typeof speed=="number"||0.2;
 		this._items=[];
-		var nodes=document.querySelectorAll("[data-parallaxX], [data-parallaxY]");
+		var nodes=document.querySelectorAll("[data-parallax-x], [data-parallax-y]");
 		this._len=nodes.length;
 		for(var i=0; i<this._len; i++)
 		{
@@ -26,8 +28,8 @@
 				currentY:0,
 				destX:0,
 				destY:0,
-				moveX:parseFloat(node.getAttribute("data-parallaxX"))||0,
-				moveY:parseFloat(node.getAttribute("data-parallaxY"))||0,
+				moveX:parseFloat(node.getAttribute("data-parallax-x"))||0,
+				moveY:parseFloat(node.getAttribute("data-parallax-y"))||0,
 				style:node.style
 			})
 		}
@@ -77,7 +79,7 @@
 	{
 		this._parentWidth=this._parent.offsetWidth||this._parent.innerWidth;
 		this._parentHeight=this._parent.offsetHeight||this._parent.innerHeight;
-		var rect=this._parent.getBoundingClientRect();
+		var rect=this._parent.getBoundingClientRect?this._parent.getBoundingClientRect():{top:0,left:0};
 		this._parentTop=rect.top;
 		this._parentLeft=rect.left;
 	}

@@ -239,15 +239,20 @@ __Package__ : com.danehansen.display
 __Class__ : public class Parallax  
 __Inheritance__ : Parallax > Object  
 
-A class for parallaxing based on mouse position or device orientation.
+A class for parallaxing based on mouse position or device orientation. The root of the parallax object would be the parent housing all the children that should be parallaxed. This object could even be the document or window if desired. You can also pass in a singular jQuery object. Along with the JavaScript instantiation, some markup is required as well to make the effect work. Any child nodes that are intended to be parallaxed should include either/both `data-parallax-x` and `data-parallax-y` attributes, which should be set as numbers representing the distance in pixels the child node will travel on that axis. Negative nubmers can be used to have a reversed parallax effect. Top and left css values are fine to have on the child nodes, as this effect uses `translate3d` to move the children.
+
+##Public Properties##
+
+* __speed__ : Number  
+A number between 0 and 1 which represents the speed at which the parallax effect eases into its destination positioning. The default value is 0.2.
 
 ##Public Methods##
 
-* __Parallax__(element:Element, speed:Number = 0.2)  
-Creates a Parallax object, using the DOM element or jQuery object.
+* __Parallax__(parent:Element, speed:Number = 0.2)  
+Creates and activates a Parallax object, using the parent DOM element or jQuery object which the mouse positioning should be based on. An optional speed argument will immediately set the speed property.
 * __pause__()  
-Causes the Parallax instance to temporarity cease functioning.
+Causes the Parallax instance to temporarity cease operations.
 * __resume__()  
-Resumes a paused Parallax instance’s functionality.
+Resumes a paused Parallax instance’s operations.
 * __destroy__()  
 Cleans up the instance when it is no longer needed.

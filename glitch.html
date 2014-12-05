@@ -4,7 +4,7 @@
 		<meta charset="utf-8" />
 		<title>Glitch</title>
 		<style type="text/css">
-			/*just for the documentation, doesn’t concern the Glitch class*/
+			/*just for the documentation, doesn’t concern the Glitch examples*/
 				body
 				{
 					background-color:#FFF;
@@ -136,8 +136,8 @@
 			<img id="basicGlitch" src="img/glitch_0.jpg"/>
 			<pre><code>var glitch=new Glitch(document.getElementById("basicGlitch"));</code></pre>
 			<form>
-				<code><pre>glitch.fucked(integer);</pre></code>
-				<input id="basicFucked" type="text"/>
+				<code><pre>glitch.fucked(<span id="basicFuckAmount"></span>);</pre></code>
+				<input id="basicFucked" type="range" max="50"/>
 			</form>
 		</div>
 		<div id="auto">
@@ -147,16 +147,16 @@
 			<button id="autoActivate">autoGlitch.activate();</button>
 			<button id="autoDeactivate">autoGlitch.deactivate();</button>
 			<form>
-				<code><pre>autoGlitch.cleanLimit(number);</pre></code>
-				<input id="autoClean" type="text" value="1500"/>
+				<code><pre>autoGlitch.cleanTime(<span id="cleanTime"></span>);</pre></code>
+				<input id="autoClean" type="range" max="5000" value="1500"/>
 			</form>
 			<form>
-				<code><pre>autoGlitch.dirtyLimit(number);</pre></code>
-				<input id="autoDirty" type="text" value="100"/>
+				<code><pre>autoGlitch.glitchTime(<span id="glitchTime"></span>);</pre></code>
+				<input id="autoDirty" type="range" max="5000" value="100"/>
 			</form>
 			<form>
-				<code><pre>autoGlitch.fuckedLimit(integer);</pre></code>
-				<input id="autoFucked" type="text" value="5"/>
+				<code><pre>autoGlitch.fuckLimit(<span id="fuckLimit"></span>);</pre></code>
+				<input id="autoFucked" type="range" max="50" value="5"/>
 			</form>
 		</div>
 		<div id="gallery">
@@ -180,24 +180,37 @@
 				//glitch
 					var glitch=new Glitch(document.getElementById("basicGlitch"));
 					var rand=Math.floor(Math.random()*50);
+					var basicFuckAmount=document.getElementById("basicFuckAmount");
 					glitch.fucked(rand);
+					basicFuckAmount.innerHTML=rand;
 					document.getElementById("basicFucked").value=rand;
 					document.getElementById("basicFucked").addEventListener("input", function(evt){
-						glitch.fucked(parseFloat(evt.target.value)||0);
+						var val=parseFloat(evt.target.value);
+						glitch.fucked(val);
+						basicFuckAmount.innerHTML=val;
 					});
 
 				//auto glitch
 					var autoGlitch=new AutoGlitch(document.getElementById("autoGlitch"));
+					var cleanTime=document.getElementById("cleanTime");
+					cleanTime.innerHTML=1500;
+					var glitchTime=document.getElementById("glitchTime");
+					glitchTime.innerHTML=100;
+					var fuckLimit=document.getElementById("fuckLimit");
+					fuckLimit.innerHTML=5;
 					document.getElementById("autoActivate").addEventListener("click", autoGlitch.activate);
 					document.getElementById("autoDeactivate").addEventListener("click", autoGlitch.deactivate);
 					document.getElementById("autoClean").addEventListener("input", function(evt){
-						autoGlitch.cleanLimit=parseFloat(evt.target.value)||0;
+						autoGlitch.cleanTime=parseFloat(evt.target.value)||0;
+						cleanTime.innerHTML=autoGlitch.cleanTime;
 					});
 					document.getElementById("autoDirty").addEventListener("input", function(evt){
-						autoGlitch.dirtyLimit=parseFloat(evt.target.value)||0;
+						autoGlitch.glitchTime=parseFloat(evt.target.value)||0;
+						glitchTime.innerHTML=autoGlitch.glitchTime;
 					});
 					document.getElementById("autoFucked").addEventListener("input", function(evt){
-						autoGlitch.fuckedLimit=parseFloat(evt.target.value)||0;
+						autoGlitch.fuckLimit=parseFloat(evt.target.value)||0;
+						fuckLimit.innerHTML=autoGlitch.fuckLimit;
 					});
 
 				//gallery transition
@@ -205,9 +218,9 @@
 					var galleryCurrent=0;
 					var ease=Linear.easeNone;
 					document.getElementById("galleryPrev").addEventListener("click", function(evt){
-						TweenLite.to(glitches[galleryCurrent], 0.5, {fucked:50, onComplete:decrement, ease:ease});
+						TweenLite.to(glitches[galleryCurrent], 0.5, {fucked:50, onComplete:prev, ease:ease});
 					});
-					function decrement()
+					function prev()
 					{
 						glitches[galleryCurrent].element.style.display="none";
 						galleryCurrent--;
@@ -217,9 +230,9 @@
 						TweenLite.fromTo(glitches[galleryCurrent], 0.5, {fucked:50}, {fucked:0, ease:ease});
 					}
 					document.getElementById("galleryNext").addEventListener("click", function(evt){
-						TweenLite.to(glitches[galleryCurrent], 0.5, {fucked:50, onComplete:increment, ease:ease});
+						TweenLite.to(glitches[galleryCurrent], 0.5, {fucked:50, onComplete:next, ease:ease});
 					});
-					function increment()
+					function next()
 					{
 						glitches[galleryCurrent].element.style.display="none";
 						galleryCurrent=(galleryCurrent+1)%glitches.length;

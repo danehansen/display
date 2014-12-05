@@ -4,7 +4,7 @@
 		<meta charset="utf-8" />
 		<title>Glitch</title>
 		<style type="text/css">
-			/*just for the documentation, doesn’t concern the Glitch class*/
+			/*just for the documentation, doesn’t concern the Parallax example*/
 				body
 				{
 					background-color:#FFF;
@@ -66,37 +66,37 @@
 				{
 					position:absolute;
 				}
-				#parallax_error_text
+				#error_text
 				{
 					top:72px;
 					left:72px;
 				}
-				#parallax_octocat
+				#octocat
 				{
 					top:94px;
 					left:356px;
 				}
-				#parallax_speeder
+				#speeder
 				{
 					top:150px;
 					left:432px;
 				}
-				#parallax_octocatshadow
+				#octocatshadow
 				{
 					top:297px;
 					left:371px;
 				}
-				#parallax_speedershadow
+				#speedershadow
 				{
 					top:263px;
 					left:442px;
 				}
-				#parallax_building_1
+				#building_1
 				{
 					top:73px;
 					left:467px;
 				}
-				#parallax_building_2
+				#building_2
 				{
 					top:113px;
 					left:762px;
@@ -108,7 +108,7 @@
 		<p><strong>Package</strong> : com.danehansen.display <br />
 		<strong>Class</strong> : public class Parallax <br />
 		<strong>Inheritance</strong> : Parallax > Object <br />
-		<p>A class for parallaxing based on mouse position or device orientation. The root of the parallax object would be the parent housing all the children that should be parallaxed. This object could be document if desired. Along with the JavaScript instantiation, some markup is required as well to make the effect work. Any child nodes that are intended to be parallaxed should include either/both data-parallaxX and data-parallaxY attributes, which should be set as numbers representing the distance in pixels the child node will travel on that axis. Negative nubmers can be used to have a reversed parallax effect. Top and left css values are fine to have on the child nodes, as this effect uses translate3d to move the children. SVG nodes can have this applied as well.</p>
+		<p>A class for parallaxing based on mouse position or device orientation. The root of the parallax object would be the parent housing all the children that should be parallaxed. This object could even be the document or window if desired. You can also pass in a singular jQuery object. Along with the JavaScript instantiation, some markup is required as well to make the effect work. Any child nodes that are intended to be parallaxed should include either/both <code>data-parallax-x</code> and <code>data-parallax-y</code> attributes, which should be set as numbers representing the distance in pixels the child node will travel on that axis. Negative nubmers can be used to have a reversed parallax effect. Top and left css values are fine to have on the child nodes, as this effect uses <code>translate3d</code> to move the children.</p>
 		<h2>Public Properties</h2>
 		<ul>
 			<li><strong>speed</strong> : Number <br />
@@ -116,12 +116,12 @@
 		</ul>
 		<h2>Public Methods</h2>
 		<ul>
-			<li><strong>Parallax</strong>(element:Element, speed:Number = 0.2) <br />
-			Creates and activates a Parallax object, using the DOM element or jQuery object which the mouse positioning should be based on. An optional speed argument will immediately set the speed property.</li>
+			<li><strong>Parallax</strong>(parent:Element, speed:Number = 0.2) <br />
+			Creates and activates a Parallax object, using the parent DOM element or jQuery object which the mouse positioning should be based on. An optional speed argument will immediately set the speed property.</li>
 			<li><strong>pause</strong>():* <br />
-			Causes the Parallax instance to temporarity cease functioning.</li>
+			Causes the Parallax instance to temporarity cease operations.</li>
 			<li><strong>resume</strong>():* <br />
-			Resumes a paused Parallax instance’s functionality.</li>
+			Resumes a paused Parallax instance’s operations.</li>
 			<li><strong>destroy</strong>():* <br />
 			Cleans up the instance when it is no longer needed.</li>
 		</ul>
@@ -129,23 +129,37 @@
 			<h2>EXAMPLE 1: BASIC PARALLAX</h2>
 			<div id="parallax_wrapper">
 				<div id="parallax_field">
-					<img data-parallaxX="0" data-parallaxY="-20" id="parallax_bg" src="img/field.jpg">
+					<img data-parallax-x="0" data-parallax-y="-20" id="parallax_bg" src="img/field.jpg">
 				</div>
 				<div id="parallax_illustration">
-					<img data-parallaxX="-75" data-parallaxY="-30" id="parallax_building_2" src="img/building_2.png">
-					<img data-parallaxX="-50" data-parallaxY="-20" id="parallax_building_1" src="img/building_1.png">
-					<img data-parallaxX="10" data-parallaxY="10" id="parallax_speedershadow" src="img/speeder_shadow.png">
-					<img data-parallaxX="10" data-parallaxY="10" id="parallax_octocatshadow" src="img/octocat_shadow.png">
-					<img data-parallaxX="10" data-parallaxY="10" id="parallax_speeder" src="img/speeder.png">
-					<img data-parallaxX="10" data-parallaxY="10" id="parallax_octocat" src="img/octocat.png">
-					<img data-parallaxX="20" data-parallaxY="10" id="parallax_error_text" src="img/404.png">
+					<img data-parallax-x="-75" data-parallax-y="-30" id="building_2" src="img/building_2.png">
+					<img data-parallax-x="-50" data-parallax-y="-20" id="building_1" src="img/building_1.png">
+					<img data-parallax-x="10" data-parallax-y="10" id="speedershadow" src="img/speeder_shadow.png">
+					<img data-parallax-x="10" data-parallax-y="10" id="octocatshadow" src="img/octocat_shadow.png">
+					<img data-parallax-x="10" data-parallax-y="10" id="speeder" src="img/speeder.png">
+					<img data-parallax-x="10" data-parallax-y="10" id="octocat" src="img/octocat.png">
+					<img data-parallax-x="20" data-parallax-y="10" id="error_text" src="img/404.png">
 				</div>
 			</div>
+			<h3>Markup</h3>
+			<pre><code>&lt;div id="parallax_wrapper"&gt;
+    &lt;div id="parallax_field"&gt;
+        &lt;img data-parallax-x="0"   data-parallax-y="-20" id="parallax_bg"            src="img/field.jpg"&gt;
+    &lt;/div&gt;
+    &lt;div id="parallax_illustration"&gt;
+        &lt;img data-parallax-x="-75" data-parallax-y="-30" id="building_2"    src="img/building_2.png"&gt;
+        &lt;img data-parallax-x="-50" data-parallax-y="-20" id="building_1"    src="img/building_1.png"&gt;
+        &lt;img data-parallax-x="10"  data-parallax-y="10"  id="speedershadow" src="img/speeder_shadow.png"&gt;
+        &lt;img data-parallax-x="10"  data-parallax-y="10"  id="octocatshadow" src="img/octocat_shadow.png"&gt;
+        &lt;img data-parallax-x="10"  data-parallax-y="10"  id="speeder"       src="img/speeder.png"&gt;
+        &lt;img data-parallax-x="10"  data-parallax-y="10"  id="octocat"       src="img/octocat.png"&gt;
+        &lt;img data-parallax-x="20"  data-parallax-y="10"  id="error_text"    src="img/404.png"&gt;
+    &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+			<h3>JavaScript</h3>
 			<pre><code>var parallax=new Parallax(document.getElementById("parallax_wrapper"));</code></pre>
-			<form>
-				<button id="pause">parallax.pause();</button>
-				<button id="resume">parallax.resume();</button>
-			</form>
+			<button id="pause">parallax.pause();</button>
+			<button id="resume">parallax.resume();</button>
 		</div>
 		<footer>author: Dane Hansen, <a href="mailto:dane@danehansen.com">dane@danehansen.com</a></footer>
 		<script src='js/danehansen/display/Parallax.js'></script>
@@ -153,11 +167,9 @@
 			(function(){
 				var parallax=new Parallax(document.getElementById("parallax_wrapper"));
 				document.getElementById("pause").addEventListener("click", function(evt){
-					evt.preventDefault();
 					parallax.pause();
 				});
 				document.getElementById("resume").addEventListener("click", function(evt){
-					evt.preventDefault();
 					parallax.resume();
 				});
 			})();
