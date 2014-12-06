@@ -37,6 +37,7 @@ function SuperSprite(sprites, loop, frameRate)
 
 SuperSprite.prototype._showFrame=function(integer)
 {
+	integer=integer%this._frames;
 	this._actualFrame=integer;
 	var data=this._spriteFrames[integer];
 	var sprite=data.sprite;

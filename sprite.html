@@ -90,7 +90,7 @@
 				}
 
 			@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi)
-			{ 
+			{
 				#basic figure
 				{
 					background-image:url(img/elephant_sprite@2x.jpg);
@@ -248,24 +248,14 @@
 			<button id="basicStop">sprite.stop();</button>
 			<button id="basicNext">sprite.nextFrame();</button>
 			<button id="basicPlay">sprite.play();</button>
-			<form>
-				<code><pre>sprite.progress(number);</pre></code>
-				<input id="basicProgress" type="text"/>
-			</form>
-			<form>
-				<code><pre>sprite.frame(integer);</pre></code>
-				<input id="basicFrame" type="text"/>
-			</form>
-			<form>
-				<code><pre>sprite.progressTo(number);</pre></code>
-				<input id="basicProgressTo" type="text"/>
-				<button id="basicProgressButton">go</button>
-			</form>
-			<form>
-				<code><pre>sprite.frameTo(integer);</pre></code>
-				<input id="basicFrameTo" type="text"/>
-				<button id="basicFrameButton">go</button>
-			</form>
+			<code><pre>sprite.progress(<span id="spriteProgress">0</span>);</pre></code>
+			<input id="basicProgress" type="range" max="1" step="0.01" value="0"/>
+			<code><pre>sprite.frame(<span id="spriteFrame">0</span>);</pre></code>
+			<input id="basicFrame" type="range" max="29" value="0"/>
+			<code><pre>sprite.progressTo(<span id="spriteProgressTo">0</span>);</pre></code>
+			<input id="basicProgressTo" type="range" max="1" step="0.01" value="0"/>
+			<code><pre>sprite.frameTo(<span id="spriteFrameTo">0</span>);</pre></code>
+			<input id="basicFrameTo" type="range" max="29" value="0"/>
 		</div>
 		<div id="looping">
 			<h2>EXAMPLE 2: LOOPING SPRITE</h2>
@@ -279,22 +269,20 @@
 			<button id="loopingPlay">sprite.play();</button>
 			<button id="loopingForward">sprite.play(true);</button>
 			<form>
-				<code><pre>sprite.progress(number);</pre></code>
-				<input id="loopingProgress" type="text"/>
+				<code><pre>sprite.progress(<span id="loopingProgressVal">0</span>);</pre></code>
+				<input id="loopingProgress" type="range" step="0.01" value="0" max="1"/>
 			</form>
 			<form>
-				<code><pre>sprite.frame(integer);</pre></code>
-				<input id="loopingFrame" type="text"/>
+				<code><pre>sprite.frame(<span id="loopingFrameVal">0</span>);</pre></code>
+				<input id="loopingFrame" type="range" value="0" max="29"/>
 			</form>
 			<form>
-				<code><pre>sprite.progressTo(number);</pre></code>
-				<input id="loopingProgressTo" type="text"/>
-				<button id="loopingProgressButton">go</button>
+				<code><pre>sprite.progressTo(<span id="loopingProgressToVal">0</span>);</pre></code>
+				<input id="loopingProgressTo" type="range" step="0.01" value="0" max="1"/>
 			</form>
 			<form>
-				<code><pre>sprite.frameTo(integer);</pre></code>
-				<input id="loopingFrameTo" type="text"/>
-				<button id="loopingFrameButton">go</button>
+				<code><pre>sprite.frameTo(<span id="loopingFrameToVal">0</span>);</pre></code>
+				<input id="loopingFrameTo" type="range" value="0" max="29"/>
 			</form>
 		</div>
 		<div id="forwardRewind">
@@ -314,7 +302,7 @@
 				<div id="part2"></div>
 			</figure>
 			<pre><code>var superSprite=new SuperSprite(
-	[new Sprite(document.getElementById("part1"), 4, 16), 
+	[new Sprite(document.getElementById("part1"), 4, 16),
 	new Sprite(document.getElementById("part2"), 4, 14)], false);</code></pre>
 			<button id="superRewind">superSprite.rewind();</button>
 			<button id="superPrev">superSprite.prevFrame();</button>
@@ -340,18 +328,24 @@
 					document.getElementById("basicNext").addEventListener("click", basic.nextFrame);
 					document.getElementById("basicPlay").addEventListener("click", basic.play);
 					document.getElementById("basicProgress").addEventListener("input", function(evt){
-						basic.progress(parseFloat(evt.target.value)||0);
+						var val=parseFloat(evt.target.value);
+						basic.progress(val);
+						document.getElementById("spriteProgress").innerHTML=val;
 					});
 					document.getElementById("basicFrame").addEventListener("input", function(evt){
-						basic.frame(parseFloat(evt.target.value)||0);
+						var val=parseFloat(evt.target.value);
+						basic.frame(val);
+						document.getElementById("spriteFrame").innerHTML=val;
 					});
-					document.getElementById("basicProgressButton").addEventListener("click", function(evt){
-						evt.preventDefault();
-						basic.progressTo(parseFloat(document.getElementById("basicProgressTo").value)||0);
+					document.getElementById("basicProgressTo").addEventListener("input", function(evt){
+						var val=parseFloat(evt.target.value);
+						basic.progressTo(val);
+						document.getElementById("spriteProgressTo").innerHTML=val;
 					});
-					document.getElementById("basicFrameButton").addEventListener("click", function(evt){
-						evt.preventDefault();
-						basic.frameTo(parseFloat(document.getElementById("basicFrameTo").value)||0);
+					document.getElementById("basicFrameTo").addEventListener("input", function(evt){
+						var val=parseFloat(evt.target.value);
+						basic.frameTo(val);
+						document.getElementById("spriteFrameTo").innerHTML=val;
 					});
 					basic.addEventListener(Sprite.ENTER_FRAME, logEvent);
 					basic.addEventListener(Sprite.COMPLETE, logEvent);
@@ -359,7 +353,7 @@
 
 				//looping sprite
 					var looping=new Sprite(document.getElementById("loopingSprite"), 4, 30, true, 24);
-					
+
 					document.getElementById("loopingBackward").addEventListener("click", function(){
 						looping.rewind(true);
 					});
@@ -372,18 +366,24 @@
 						looping.play(true);
 					});
 					document.getElementById("loopingProgress").addEventListener("input", function(evt){
-						looping.progress(parseFloat(evt.target.value)||0);
+						var val=parseFloat(evt.target.value);
+						looping.progress(val);
+						document.getElementById("loopingProgressVal").innerHTML=val;
 					});
 					document.getElementById("loopingFrame").addEventListener("input", function(evt){
-						looping.frame(parseFloat(evt.target.value)||0);
+						var val=parseFloat(evt.target.value);
+						looping.frame(val);
+						document.getElementById("loopingFrameVal").innerHTML=val;
 					});
-					document.getElementById("loopingProgressButton").addEventListener("click", function(evt){
-						evt.preventDefault();
-						looping.progressTo(parseFloat(document.getElementById("loopingProgressTo").value)||0);
+					document.getElementById("loopingProgressTo").addEventListener("input", function(evt){
+						var val=parseFloat(evt.target.value);
+						looping.progressTo(val);
+						document.getElementById("loopingProgressToVal").innerHTML=val;
 					});
-					document.getElementById("loopingFrameButton").addEventListener("click", function(evt){
-						evt.preventDefault();
-						looping.frameTo(parseFloat(document.getElementById("loopingFrameTo").value)||0);
+					document.getElementById("loopingFrameTo").addEventListener("input", function(evt){
+						var val=parseFloat(evt.target.value);
+						looping.frameTo(val);
+						document.getElementById("loopingFrameToVal").innerHTML=val;
 					});
 					looping.addEventListener(Sprite.ENTER_FRAME, logEvent);
 					looping.addEventListener(Sprite.COMPLETE, logEvent);
@@ -391,14 +391,14 @@
 
 				//forward/rewind
 					var forwardRewind=new ForwardRewind(document.getElementById("forwardRewindSprite"), 4, 30, 240);
-					
+
 					forwardRewind.addEventListener(Sprite.ENTER_FRAME, logEvent);
 					forwardRewind.addEventListener(Sprite.COMPLETE, logEvent);
 					forwardRewind.addEventListener(Sprite.REVERSE_COMPLETE, logEvent);
 
 				//forward/forward
 					var forwardForward=new ForwardForward(document.getElementById("forwardForwardSprite"), 4, 30, 15);
-					
+
 					forwardForward.addEventListener(Sprite.ENTER_FRAME, logEvent);
 					forwardForward.addEventListener(Sprite.COMPLETE, logEvent);
 

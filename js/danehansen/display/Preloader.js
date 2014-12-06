@@ -1,5 +1,5 @@
 "use strict";
-	
+
 //////////////////////////////////////////////////
 //author:Dane Hansen/////////////////////////////
 //www.danehansen.com////////////////////////////
@@ -91,6 +91,7 @@ Preloader.prototype.play=function()
 Preloader.prototype.stop=function(callback)
 {
 	this._isPlaying=false;
+	this._callback=callback;
 }
 
 Preloader.prototype.revolve=function()
@@ -98,5 +99,10 @@ Preloader.prototype.revolve=function()
 	if(this._isPlaying || this._progress%2!=0)
 	{
 		TweenLite.to(this, this.duration, {progress:Math.round(this._progress+1), ease:Cubic.easeInOut, onComplete:this.revolve, onCompleteScope:this});
+	}
+	else if(!this._isPlaying && this._progress%2==0 && !(!this._callback))
+	{
+		this._callback();
+		this._callback=null;
 	}
 }
