@@ -1,0 +1,21 @@
+"use strict";
+
+//////////////////////////////////////////////////
+// author: Dane Hansen //////////////////////////
+// www.danehansen.com //////////////////////////
+// version: 1.0.0 /////////////////////////////
+//////////////////////////////////////////////
+
+var SVG = {};
+
+(function(){
+	"use strict";
+
+	SVG.drawArc = function(x, y, startA, endA)
+	{
+
+	}
+
+	if(typeof module != "undefined")
+		module.exports = SVG;
+})();
