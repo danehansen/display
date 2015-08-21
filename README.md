@@ -278,12 +278,12 @@ Helper class to ease the reading of image data from an image or video.
 Creates an ImageDataReader object, using a provided image or video element. Whether the resulting data should be mirrored can also be specified here.
 * __gather__()
 Causes the instance to refresh its image data.
-* __brightness__(x:uint, y:uint, fraction:Boolean = false):Number
-[static] Returns a brightness value of a specified image data set at a specified x and y coorindate. By default returns a number between 0-756, but optionally can be returned as a fraction 0-1. Whether or not the image is mirrored can aslo be specified here.
-* __brightness__(x:uint, y:uint, fraction:Boolean = false):Number
-Returns a brightness value at a specified x and y coorindate. By default returns a number between 0-756, but optionally can be returned as a fraction 0-1.
-* __average__(fraction:Boolean = false):Number
-Returns an average brightness value of the entire data set. By default returns a number between 0-756, but optionally can be returned as a fraction 0-1.
+* __brightness__(data:Array, width:uint, height:uint, x:uint, y:uint, mirror:Boolean = false):Number
+[static] Returns a brightness value of a specified image data set at a specified x and y coorindate. Whether or not the image is mirrored can aslo be specified here.
+* __brightness__(x:uint, y:uint, fraction:Boolean = false, mirror:Boolean = false):Number
+Returns a brightness value at a specified x and y coorindate. By default returns a number between 0-756, but optionally can be returned as a fraction 0-1. Whether or not the image is mirrored can aslo be specified here.
+* __adjustContrast__(reset:Boolean = false)
+Adjusts the instance‘s contrast based on the low, high, and average brightness values. When reset is set true, the adjustment is nullified.
 * __r__(x:uint, y:uint):uint
 Returns an red value 0-255 at a specified x and y coordinate.
 * __g__(x:uint, y:uint):uint
@@ -301,16 +301,16 @@ Helper class to convert image data to characters from a set, such as ASCII.
 
 ##Public Properties##
 
-* __data__ : Array
-[Read-only] Array of image data.
+* __ASCII__ : Array
+[static] An array representing the ASCII character set.
+* __CODE_PAGE_437__ : Array
+[static] An array representing the Code Page 437 character set.
 
 ##Public Methods##
 
 * __CharImage__(dest:Element, charSet:Array = CharImage.ASCII, mirror:Boolean = false)
 Creates a CharImage object, using a provided element to put the text into. A character set, such as ASCII, can also be provided. Whether the resulting data should be mirrored can also be specified here.
-* __gather__()
-Causes the instance to refresh its image data.
 * __brightnessToChar__(brightness:uint):String
 Returns a string representing the correct brightness from the calculated character set.
-* __dataToString__(data:Array, columns:uint, rows:uint):String
+* __dataToString__(idr:ImageDataReader, columns:uint, rows:uint):String
 Returns an entire depiction of an image data using the character set.

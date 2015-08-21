@@ -19,8 +19,12 @@
 		CharImage.ASCII.push(String.fromCharCode(i));
 	}
 
+	CharImage.CODE_PAGE_437 = "☺☻♥♦♣♠•◘○◙♂♀♪♫☼►◄↕‼¶§▬↨↑↓→←∟↔▲▼ !\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\]^_`abcdefghijklmnopqrstuvwxyz{|}~⌂ÇüéâäàåçêëèïîìÄÅÉæÆôöòûùÿÖÜ¢£¥₧ƒáíóúñÑªº¿⌐¬½¼¡«»░▒▓│┤╡╢╖╕╣║╗╝╜╛┐└┴┬├─┼╞╟╚╔╩╦╠═╬╧╨╤╥╙╘╒╓╫╪┘┌█▄▌▐▀αßΓπΣσµτΦΘΩδ∞φε∩≡±≥≤⌠⌡÷≈°∙·√ⁿ²■".split("");
+
 	function _entitify(str)
 	{
+		/*return str.replace(/[\u00A0-\u9999<>\&]/gim, function(i) {
+   		return '&#'+i.charCodeAt(0)+';';});*/
 		if(str === " ")
 			return "&nbsp;";
 		else if(str === '"')
@@ -77,26 +81,27 @@
 			var charDatas = [];
 			this._shades = [];
 			var columnWidth = Math.ceil(this.columnWidth);
+			var rowHeight = Math.ceil(this.rowHeight);
 			var backgroundColor = computedStyle.backgroundColor;
 			var color = computedStyle.color;
 			for(var i = 0, iLen = this._charSet.length; i < iLen; i++)
 			{
 				var str = this._charSet[i];
 				context.fillStyle = backgroundColor;
-				context.fillRect(0, 0, columnWidth, this.rowHeight);
+				context.fillRect(0, 0, columnWidth, rowHeight);
 				context.fillStyle = color;
 				context.fillText(str, 0, 0);
-				var data = context.getImageData(0, 0, columnWidth, this.rowHeight).data;
+				var data = context.getImageData(0, 0, columnWidth, rowHeight).data;
 				var brightness = 0;
-				for(var j = 0; j < this.rowHeight; j++)
+				for(var j = 0; j < rowHeight; j++)
 				{
 					for(var k = 0; k < columnWidth; k++)
 					{
-						brightness += ImageDataReader.brightness(data, columnWidth, this.rowHeight, k, j);
+						brightness += ImageDataReader.brightness(data, columnWidth, rowHeight, k, j);;
 					}
 				}
-				brightness = Math.round(brightness / (columnWidth * this.rowHeight));
-				charDatas.push({str: _entitify(str), brightness: brightness});
+				brightness = Math.round(brightness / (columnWidth * rowHeight));
+				charDatas.push({str: _entitify(this._charSet[i]), brightness: brightness});
 			}
 			document.body.removeChild(canvas);
 
@@ -142,14 +147,14 @@
 		return this._shades[brightness];
 	}
 
-	CharImage.prototype.dataToString = function(data, columns, rows)
+	CharImage.prototype.dataToString = function(idr, columns, rows)
 	{
 		var str = "";
 		for(var i = 0; i < rows; i++)
 		{
 			for(var j = 0; j < columns; j++)
 			{
-				str += this.brightnessToChar(Math.min(ImageDataReader.WHITE, Math.max(0, ImageDataReader.brightness(data, columns, rows, j, i, false, this._mirror) + this._offset)));
+				str += this.brightnessToChar(Math.min(ImageDataReader.WHITE, Math.max(0, idr.brightness(j, i, false, this._mirror))));
 				if(j === columns - 1)
 					str += "<br/>";
 			}
@@ -157,14 +162,8 @@
 		return str;
 	}
 
-	CharImage.prototype.offset = function(num)
-	{
-		// this._offset = -Math.round(num * ImageDataReader.WHITE);
-	}
-
 	if(typeof module != "undefined")
 		module.exports = CharImage;
 	else if(typeof window != "undefined")
 		window.CharImage = CharImage;
 })();
-
