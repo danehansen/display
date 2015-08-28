@@ -256,6 +256,12 @@ Creates a Canvas object, using the provided canvas element. It bases the sizing 
 Creates a Canvas object, using the provided height and width.
 * __correctArcs__()
 [static] Overrides the browser’s default arc method with one that looks more correct. Only needed if drawing several arcs/circles that need to align closely. The bug seems to only exist in Chrome currently, and hopefully in time this polyfill will no longer be needed.
+* __textHeight__(family:String, size:*, weight:String = "normal", style:String = "normal", variant:String = "normal"):Number
+[static] Calculates the height of a line of text given a family and size and option weight, style and variant.
+* __textWidth__(str:String, family:String, size:*, weight:String = "normal", style:String = "normal", variant:String = "normal"):Number
+[static] Calculates the width of a line of text given a family and size and option weight, style and variant.
+* __measureText__(str:String, family:String, size:*, weight:String = "normal", style:String = "normal", variant:String = "normal"):Object
+[static] Returns an object with width and height properties reflecting the provided options.
 
 #ImageDataReader#
 
@@ -265,25 +271,27 @@ __Inheritance__ : ImageDataReader > Object
 
 Helper class to ease the reading of image data from an image or video.
 
+##Public Constants##
+* __WHITE__ : uint
+[static] The highest brightness value a pixel can have.
+
 ##Public Properties##
 
 * __data__ : Array
 [Read-only] Array of image data.
-* __WHITE__ : uint
-[static] The highest brightness value a pixel can have.
 
 ##Public Methods##
 
 * __ImageDataReader__(src:Element, mirror:Boolean = false)
 Creates an ImageDataReader object, using a provided image or video element. Whether the resulting data should be mirrored can also be specified here.
-* __gather__()
-Causes the instance to refresh its image data.
+* __adjustContrast__(reset:Boolean = false)
+Adjusts the instance‘s contrast based on the low, high, and average brightness values. When reset is set true, the adjustment is nullified.
 * __brightness__(data:Array, width:uint, height:uint, x:uint, y:uint, mirror:Boolean = false):Number
 [static] Returns a brightness value of a specified image data set at a specified x and y coorindate. Whether or not the image is mirrored can aslo be specified here.
 * __brightness__(x:uint, y:uint, fraction:Boolean = false, mirror:Boolean = false):Number
 Returns a brightness value at a specified x and y coorindate. By default returns a number between 0-756, but optionally can be returned as a fraction 0-1. Whether or not the image is mirrored can aslo be specified here.
-* __adjustContrast__(reset:Boolean = false)
-Adjusts the instance‘s contrast based on the low, high, and average brightness values. When reset is set true, the adjustment is nullified.
+* __gather__()
+Causes the instance to refresh its image data.
 * __r__(x:uint, y:uint):uint
 Returns an red value 0-255 at a specified x and y coordinate.
 * __g__(x:uint, y:uint):uint
@@ -299,7 +307,7 @@ __Inheritance__ : CharImage > Object
 
 Helper class to convert image data to characters from a set, such as ASCII.
 
-##Public Properties##
+##Public Constants##
 
 * __ASCII__ : Array
 [static] An array representing the ASCII character set.

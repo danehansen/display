@@ -9,7 +9,7 @@
 
 	//requires danehansen/display/Sprite.js
 	if(typeof module != "undefined")
-		var EventDispatcher = require("./Sprite");
+		EventDispatcher = require("./Sprite");
 
 	ForwardForward.prototype = Object.create(Sprite.prototype);
 	ForwardForward.prototype.constructor = ForwardForward;

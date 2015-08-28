@@ -7,11 +7,11 @@
 (function(){
 	"use strict";
 
-	/*if(typeof module != "undefined")
+	if(typeof module != "undefined")
 	{
-		var MyMath = require("./MyMath");
-		var ImageDataReader = require("./ImageDataReader");
-	}*/
+		MyMath = require("../utils/MyMath");
+		ImageDataReader = require("./ImageDataReader");
+	}
 
 	CharImage.ASCII = [];
 	for(var i = 32; i <= 126; i++)

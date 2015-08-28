@@ -9,7 +9,7 @@
 
 	//requires danehansen/display/Glitch.js
 	if(typeof module != "undefined")
-		var Glitch = require("./Glitch");
+		Glitch = require("./Glitch");
 
 	AutoGlitch.prototype=Object.create(Glitch.prototype);
 	AutoGlitch.prototype.constructor=AutoGlitch;
@@ -56,4 +56,6 @@
 
 	if(typeof module != "undefined")
 		module.exports = AutoGlitch;
+	else if(typeof window != "undefined")
+		window.AutoGlitch = AutoGlitch;
 })();

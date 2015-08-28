@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>Display</title>
+		<style type="text/css">
+			body
+			{
+				background-color:#FFF;
+				color:#000;
+				font-family:Helvetica, Arial;
+				font-size:12px;
+				padding:50px;
+			}
+
+			body > div
+			{
+				width:600px;
+				padding:20px 0;
+				margin-top:30px;
+			}
+
+			body > div, footer
+			{
+				border-top:1px solid #000;
+			}
+
+			footer
+			{
+				padding-top:20px;
+			}
+		</style>
+	</head>
+	<body>
+		<h1>Glitch</h1>
+		<p><a href="glitch.html" target="_self">glitch.html</a></p>
+		<h1>AutoGlitch</h1>
+		<p><a href="glitch.html" target="_self">glitch.html</a></p>
+		<h1>Parallax</h1>
+		<p><a href="parallax.html" target="_self">parallax.html</a></p>
+		<h1>Sprite</h1>
+		<p><a href="sprite.html" target="_self">sprite.html</a></p>
+		<h1>ForwardRewind</h1>
+		<p><a href="sprite.html" target="_self">sprite.html</a></p>
+		<h1>ForwardForward</h1>
+		<p><a href="sprite.html" target="_self">sprite.html</a></p>
+		<h1>SuperSprite</h1>
+		<p><a href="sprite.html" target="_self">sprite.html</a></p>
+		<h1>Preloader</h1>
+		<p><a href="preloader.html" target="_self">preloader.html</a></p>
+		<h1>Canvas</h1>
+		<p><strong>Package</strong> : com.danehansen.display
+		<strong>Class</strong> : public class Canvas
+		<strong>Inheritance</strong> : Canvas > Object</p>
+		<p>A helper class for working with the HTML5 canvas with not that very many shortcuts.</p>
+		<h2>Public Properties</h2>
+		<ul>
+			<li><strong>element</strong> : Element
+		[Read-only] DOM Element manipulated.</li>
+		</ul>
+		<h2>Public Methods</h2>
+		<ul>
+			<li><strong>Canvas</strong>(element:Element)
+			Creates a Canvas object, using the provided canvas element. It bases the sizing off the size of the element from its css properties.</li>
+			<li><strong>Canvas</strong>(width:uint, height:uint)
+			Creates a Canvas object, using the provided height and width.</li>
+			<li><strong>correctArcs</strong>()
+			[static] Overrides the browser’s default arc method with one that looks more correct. Only needed if drawing several arcs/circles that need to align closely. The bug seems to only exist in Chrome currently, and hopefully in time this polyfill will no longer be needed.</li>
+			<li><strong>textHeight</strong>(family:String, size:*, weight:String = "normal", style:String = "normal", variant:String = "normal"):Number
+			[static] Calculates the height of a line of text given a family and size and option weight, style and variant.</li>
+			<li><strong>textWidth</strong>(str:String, family:String, size:*, weight:String = "normal", style:String = "normal", variant:String = "normal"):Number
+			[static] Calculates the width of a line of text given a family and size and option weight, style and variant.</li>
+			<li><strong>measureText</strong>(str:String, family:String, size:*, weight:String = "normal", style:String = "normal", variant:String = "normal"):Object
+			[static] Returns an object with width and height properties reflecting the provided options.</li>
+		</ul>
+		<h1>ImageDataReader</h1>
+		<p><strong>Package</strong> : com.danehansen.display
+		<strong>Class</strong> : public class ImageDataReader
+		<strong>Inheritance</strong> : ImageDataReader > Object</p>
+		<p>Helper class to ease the reading of image data from an image or video.</p>
+		<h2>Public Constants</h2>
+		<ul>
+			<li><strong>WHITE</strong> : uint
+		[static] The highest brightness value a pixel can have.</li>
+		</ul>
+		<h2>Public Properties</h2>
+		<ul>
+			<li><strong>data</strong> : Array
+			[Read-only] Array of image data.</li>
+		</ul>
+		<h2>Public Methods</h2>
+		<ul>
+			<li><strong>ImageDataReader</strong>(src:Element, mirror:Boolean = false)
+			Creates an ImageDataReader object, using a provided image or video element. Whether the resulting data should be mirrored can also be specified here.</li>
+			<li><strong>adjustContrast</strong>(reset:Boolean = false)
+			Adjusts the instance‘s contrast based on the low, high, and average brightness values. When reset is set true, the adjustment is nullified.</li>
+			<li><strong>brightness</strong>(data:Array, width:uint, height:uint, x:uint, y:uint, mirror:Boolean = false):Number
+			[static] Returns a brightness value of a specified image data set at a specified x and y coorindate. Whether or not the image is mirrored can aslo be specified here.</li>
+			<li><strong>brightness</strong>(x:uint, y:uint, fraction:Boolean = false, mirror:Boolean = false):Number
+			Returns a brightness value at a specified x and y coorindate. By default returns a number between 0-756, but optionally can be returned as a fraction 0-1. Whether or not the image is mirrored can aslo be specified here.</li>
+			<li><strong>gather</strong>()
+			Causes the instance to refresh its image data.</li>
+			<li><strong>r</strong>(x:uint, y:uint):uint
+			Returns an red value 0-255 at a specified x and y coordinate.</li>
+			<li><strong>g</strong>(x:uint, y:uint):uint
+			Returns an greed value 0-255 at a specified x and y coordinate.</li>
+			<li><strong>b</strong>(x:uint, y:uint):uint
+			Returns an blue value 0-255 at a specified x and y coordinate.</li>
+		</ul>
+		<h1>CharImage</h1>
+		<p><strong>Package</strong> : com.danehansen.display
+		<strong>Class</strong> : public class CharImage
+		<strong>Inheritance</strong> : CharImage > Object</p>
+		<p>Helper class to convert image data to characters from a set, such as ASCII.</p>
+		<h2>Public Constants</h2>
+		<ul>
+			<li><strong>ASCII</strong> : Array
+			[static] An array representing the ASCII character set.</li>
+			<li><strong>CODE<em>PAGE</em>437</strong> : Array
+			[static] An array representing the Code Page 437 character set.</li>
+		</ul>
+		<h2>Public Methods</h2>
+		<ul>
+			<li><strong>CharImage</strong>(dest:Element, charSet:Array = CharImage.ASCII, mirror:Boolean = false)
+			Creates a CharImage object, using a provided element to put the text into. A character set, such as ASCII, can also be provided. Whether the resulting data should be mirrored can also be specified here.</li>
+			<li><strong>brightnessToChar</strong>(brightness:uint):String
+			Returns a string representing the correct brightness from the calculated character set.</li>
+			<li><strong>dataToString</strong>(idr:ImageDataReader, columns:uint, rows:uint):String
+			Returns an entire depiction of an image data using the character set.</li>
+		</ul>
+		<footer>author: Dane Hansen, <a href="mailto:dane@danehansen.com">dane@danehansen.com</a></footer>
+	</body>
+</html>

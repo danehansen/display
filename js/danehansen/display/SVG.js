@@ -1,5 +1,3 @@
-"use strict";
-
 //////////////////////////////////////////////////
 // author: Dane Hansen //////////////////////////
 // www.danehansen.com //////////////////////////
@@ -13,7 +11,7 @@ var SVG = {};
 
 	SVG.drawArc = function(x, y, startA, endA)
 	{
-
+		//TODO
 	}
 
 	if(typeof module != "undefined")

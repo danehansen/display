@@ -10,9 +10,9 @@
 	if(typeof module != "undefined")
 	{
 		//requires danehansen/events/EventDispatcher.js
-		var EventDispatcher = require("../events/EventDispatcher");
+		EventDispatcher = require("../events/EventDispatcher");
 		//requires greensock/TweenLite.js
-		var TweenLite = require("../../greensock/TweenLite");
+		TweenLite = require("../../greensock/TweenLite");
 	}
 
 	Preloader.COMPLETE = "complete";

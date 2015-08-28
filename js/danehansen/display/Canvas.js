@@ -136,8 +136,8 @@
 		return {width: Canvas.textWidth(str, family, size, weight, style, variant), height: Canvas.textHeight(family, size, weight, style, variant)};
 	}
 
-	if(typeof module ! = "undefined")
+	if(typeof module != "undefined")
 		module.exports = Canvas;
-	else if(typeof window ! = "undefined")
+	else if(typeof window != "undefined")
 		window.Canvas = Canvas;
 })();

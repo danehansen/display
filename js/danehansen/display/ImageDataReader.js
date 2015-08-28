@@ -31,31 +31,6 @@
 		this.adjustContrast(true);
 	}
 
-	ImageDataReader.prototype.gather = function()
-	{
-			this._context.drawImage(this._src, 0, 0, this._width, this._height);
-			this.data = this._context.getImageData(0, 0, this._width, this._height).data;
-	}
-
-	ImageDataReader.prototype.brightness = function(x, y, fraction, mirror)
-	{
-		var b =  ImageDataReader.brightness(this.data, this._width, this._height, x, y, this._mirror);
-		if(this._shouldAdjust)
-		{
-			if(b < this._avg)
-			{
-				b = Math.round(MyMath.relativePercentage(this._low, this._avg, b) / 2 * ImageDataReader.WHITE);
-			}
-			else
-			{
-				b = Math.round(MyMath.relativePercentage(this._avg, this._high, b) / 2 * ImageDataReader.WHITE + Math.floor(ImageDataReader.WHITE / 2));
-			}
-		}
-		if(fraction)
-			b /= ImageDataReader.WHITE;
-		return b;
-	}
-
 	ImageDataReader.prototype.adjustContrast = function(reset)
 	{
 		if(reset)
@@ -81,6 +56,31 @@
 			this._avg = Math.round(this._avg / (this._width * this._height));
 		}
 		this._shouldAdjust = this._low !== 0 || this._high !== ImageDataReader.WHITE || this._avg !== Math.floor(ImageDataReader.WHITE / 2);
+	}
+
+	ImageDataReader.prototype.brightness = function(x, y, fraction, mirror)
+	{
+		var b =  ImageDataReader.brightness(this.data, this._width, this._height, x, y, this._mirror);
+		if(this._shouldAdjust)
+		{
+			if(b < this._avg)
+			{
+				b = Math.round(MyMath.relativePercentage(this._low, this._avg, b) / 2 * ImageDataReader.WHITE);
+			}
+			else
+			{
+				b = Math.round(MyMath.relativePercentage(this._avg, this._high, b) / 2 * ImageDataReader.WHITE + Math.floor(ImageDataReader.WHITE / 2));
+			}
+		}
+		if(fraction)
+			b /= ImageDataReader.WHITE;
+		return b;
+	}
+
+	ImageDataReader.prototype.gather = function()
+	{
+			this._context.drawImage(this._src, 0, 0, this._width, this._height);
+			this.data = this._context.getImageData(0, 0, this._width, this._height).data;
 	}
 
 	ImageDataReader.prototype.r = function(x, y)
