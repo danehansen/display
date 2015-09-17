@@ -4,14 +4,13 @@
 // version: 1.0.0 /////////////////////////////
 //////////////////////////////////////////////
 
+//requires danehansen/utils/MyMath.js
+var MyMath = MyMath || require("../utils/MyMath");
+//requires danehansen/display/ImageDataReader.js
+var ImageDataReader = ImageDataReader || require("./ImageDataReader");
+
 (function(){
 	"use strict";
-
-	if(typeof module != "undefined")
-	{
-		MyMath = require("../utils/MyMath");
-		ImageDataReader = require("./ImageDataReader");
-	}
 
 	CharImage.ASCII = [];
 	for(var i = 32; i <= 126; i++)
@@ -23,8 +22,6 @@
 
 	function _entitify(str)
 	{
-		/*return str.replace(/[\u00A0-\u9999<>\&]/gim, function(i) {
-   		return '&#'+i.charCodeAt(0)+';';});*/
 		if(str === " ")
 			return "&nbsp;";
 		else if(str === '"')

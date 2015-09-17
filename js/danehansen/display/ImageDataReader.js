@@ -4,6 +4,9 @@
 // version: 1.0.0 /////////////////////////////
 //////////////////////////////////////////////
 
+//requires danehansen/utils/MyMath.js
+var MyMath = MyMath || require("../utils/MyMath");
+
 (function(){
 	"use strict";
 

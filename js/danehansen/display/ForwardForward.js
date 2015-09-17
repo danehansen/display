@@ -4,12 +4,11 @@
 // version: 1.0.0 /////////////////////////////
 //////////////////////////////////////////////
 
+//requires danehansen/display/Sprite.js
+var Sprite = Sprite || require("./Sprite");
+
 (function(){
 	"use strict";
-
-	//requires danehansen/display/Sprite.js
-	if(typeof module != "undefined")
-		EventDispatcher = require("./Sprite");
 
 	ForwardForward.prototype = Object.create(Sprite.prototype);
 	ForwardForward.prototype.constructor = ForwardForward;

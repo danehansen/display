@@ -4,16 +4,13 @@
 // version: 1.0.0 /////////////////////////////
 //////////////////////////////////////////////
 
+//requires danehansen/display/EventDispatcher.js
+var EventDispatcher = EventDispatcher || require("../events/EventDispatcher");
+//requires greensock/TweenLite.js
+var TweenLite = TweenLite || require("../../greensock/TweenLite");
+
 (function(){
 	"use strict";
-
-	if(typeof module != "undefined")
-	{
-		//requires danehansen/events/EventDispatcher.js
-		EventDispatcher = require("../events/EventDispatcher");
-		//requires greensock/TweenLite.js
-		TweenLite = require("../../greensock/TweenLite");
-	}
 
 	Preloader.COMPLETE = "complete";
 	Preloader._START_ANGLE = -Math.PI * 0.5;

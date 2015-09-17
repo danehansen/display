@@ -4,12 +4,11 @@
 // version: 1.0.0 /////////////////////////////
 //////////////////////////////////////////////
 
+//requires danehansen/display/Glitch.js
+var Glitch = Glitch || require("./Glitch");
+
 (function(){
 	"use strict";
-
-	//requires danehansen/display/Glitch.js
-	if(typeof module != "undefined")
-		Glitch = require("./Glitch");
 
 	AutoGlitch.prototype=Object.create(Glitch.prototype);
 	AutoGlitch.prototype.constructor=AutoGlitch;
