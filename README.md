@@ -5,7 +5,7 @@ __Class__ : public class Glitch
 __Inheritance__ : Glitch > Object
 __Subclasses__ : AutoGlitch
 
-Instances of this class will take the image or element (with background image), and in real time glitch out the bytes of the image. No matter if the image is .jpg, .png, or .gif, it will by glitched like a .jpg becuase that is what looks the coolest. This effect will not work locally unless you set up a local server. Otherwise the canvas thinks it’s all tainted and craps out. Also, if you pull in an image from a different server, it will tain the canvas unless you make it think it’s coming from it’s own server, via a fpassthru or readfile (included) or some other serverside trickery.
+Instances of this class will take the image or element (with background image), and in real time glitch out the bytes of the image. No matter if the image is .jpg, .png, or .gif, it will by glitched like a .jpg becuase that is what looks the coolest. This effect will not work locally unless you set up a local server. Otherwise the canvas thinks it’s all tainted and craps out. Also, if you pull in an image from a different server, it will taint the canvas unless you make it think it’s coming from it’s own server, via a fpassthru or readfile (included) or some other serverside trickery.
 
 ##Public Properties##
 
@@ -14,10 +14,14 @@ Instances of this class will take the image or element (with background image), 
 
 ##Public Methods##
 
-* __Glitch__(element:Element)
-Creates a Glitch object, using a provided image element or other element with a background-image applied.
+* __Glitch__(element:*)
+Creates a Glitch object, using a provided image element or other element with a background-image applied or an object with src, dest, and mirror properties if you want to do a video effect.
 * __fucked__(value:int):*
 Gets or sets the Glitch’s level of fucked. A low number like 1-3 usually results in a subtle glitching where you can still recognize the image. A higher number such as 50 can more likely distort the image until it is unrecognizable. A value of 0 returns the image to its whole self. Remember that this corruption is actually happening at random, so the results are completely unpredictable. There is a chance that a high fucked amount could still leave an image totally recognizable. Also a chance that a fucked amount of 1 could leave an image completely absent.
+* __start__()
+Starts a video glitch effect.
+* __stop__()
+Stops a video glitch effect.
 
 #AutoGlitch#
 

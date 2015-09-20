@@ -10,8 +10,8 @@ var Glitch = Glitch || require("./Glitch");
 (function(){
 	"use strict";
 
-	AutoGlitch.prototype=Object.create(Glitch.prototype);
-	AutoGlitch.prototype.constructor=AutoGlitch;
+	AutoGlitch.prototype = Object.create(Glitch.prototype);
+	AutoGlitch.prototype.constructor = AutoGlitch;
 	function AutoGlitch(element, cleanTime, glitchTime, fuckLimit)
 	{
 		Glitch.call(this, element);

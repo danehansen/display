@@ -7,7 +7,7 @@
 //requires danehansen/display/EventDispatcher.js
 var EventDispatcher = EventDispatcher || require("../events/EventDispatcher");
 //requires greensock/TweenLite.js
-var TweenLite = TweenLite || require("../../greensock/TweenLite");
+var TweenLite = TweenLite || require("gsap/src/uncompressed/TweenLite");
 
 (function(){
 	"use strict";
